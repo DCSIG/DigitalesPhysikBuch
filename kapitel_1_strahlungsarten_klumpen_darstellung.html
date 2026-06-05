@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digitales Schulbuch: Strahlungsarten</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slide { display: none; }
+        .slide.active { display: grid; animation: fadeIn 0.5s ease-in-out; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        canvas {
+            background-color: #0f172a; 
+            border-radius: 0.5rem;
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            aspect-ratio: 5/3;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+        }
+
+        .nav-btn {
+            transition: all 0.2s;
+        }
+        .nav-btn:hover:not(:disabled) {
+            transform: scale(1.05);
+        }
+        .nav-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        body { overflow-x: hidden; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
+
+    <!-- Header -->
+    <header class="bg-slate-900 text-white shadow-md sticky top-0 z-20">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-lg md:text-2xl font-bold flex items-center">
+                <span class="bg-blue-600 text-white px-2 py-1 rounded-md mr-3 text-xs md:text-sm">Kapitel 1</span> 
+                Die Strahlungsarten
+            </h1>
+            <div class="text-sm text-slate-300 font-medium bg-slate-800 px-3 py-1 rounded-full whitespace-nowrap">
+                Seite <span id="page-indicator">1</span> / 6
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full relative">
+        
+        <!-- ================= S L I D E  1: Einführung & Atombau ================= -->
+        <div id="slide-1" class="slide active grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-y-auto" style="max-height: 70vh;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6">1. Die Entdeckung und der leere Raum</h2>
+                
+                <h3 class="text-xl font-bold text-blue-700 mb-2">Der Kriminalfall von 1896</h3>
+                <p class="mb-4 text-slate-700">
+                    Der Forscher Henri Becquerel legte einen Fotofilm fest eingewickelt in lichtdichtes, schwarzes Papier in eine dunkle Schublade. Darauf lag ein unscheinbarer Stein (ein Uransalz). Als er den Film später entwickelte, war darauf der dunkle Umriss des Steins "eingebrannt"! Der Stein musste eine unsichtbare "Strahlung" aussenden, die mühelos das schwarze Papier durchschoss. Die <strong>Radioaktivität</strong> war entdeckt. Aber woher kam sie?
+                </p>
+
+                <h3 class="text-xl font-bold text-blue-700 mt-6 mb-2">Der Atombau: Nichts als leerer Raum</h3>
+                <p class="mb-4 text-slate-700">
+                    Um Strahlung zu verstehen, müssen wir tief in die Materie hineinzoomen. Alles besteht aus <strong>Atomen</strong>. Ein Atom ist jedoch nicht massiv. Im absoluten Zentrum sitzt ein winziger, dichter <strong>Atomkern</strong>, in dem sich die positiven Protonen (+) und neutralen Neutronen wie ein dichter Haufen aneinanderquetschen. Weit draußen kreisen die leichten Elektronen (-) in der Atomhülle.
+                </p>
+                <div class="bg-slate-100 p-4 border-l-4 border-slate-400 mb-4 rounded italic text-sm">
+                    <strong>Stell dir vor:</strong> Wäre der Atomkern so groß wie ein Stecknadelkopf und läge auf dem Anstoßpunkt eines Fußballstadions, dann würden die Elektronen auf den obersten Zuschauerrängen kreisen. Dazwischen ist: Nichts. Absolut leerer Raum!
+                </div>
+                <p class="text-slate-700">
+                    Radioaktivität hat nichts mit der Hülle zu tun. Sie entsteht tief drinnen, im winzigen, dichten Atomkern.
+                </p>
+            </div>
+            
+            <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
+                <h3 class="font-bold text-lg mb-2 text-slate-700">Animation: Zoom in das Atom</h3>
+                <p class="text-sm text-slate-500 mb-4 text-center">Beobachte, wie die Kamera vom dichten Atomkern herauszoomt, um die ferne Elektronenhülle zu zeigen.</p>
+                <div class="w-full relative">
+                    <canvas id="canvas-1" width="500" height="300"></canvas>
+                    <div id="anim-overlay-1" class="absolute top-4 left-4 bg-black/50 text-white px-3 py-1 rounded text-sm font-bold">Zoomt...</div>
+                </div>
+                <button onclick="restartZoomAnim()" class="mt-4 text-sm text-blue-600 hover:underline font-bold">Animation neustarten</button>
+            </div>
+        </div>
+
+        <!-- ================= S L I D E  2: Was ist Radioaktivität? (Ungleichgewicht) ================= -->
+        <div id="slide-2" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-y-auto" style="max-height: 70vh;">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6">2. Was ist Radioaktivität?</h2>
+                
+                <h3 class="text-xl font-bold text-red-600 mb-2">Der Kleber und das Gleichgewicht</h3>
+                <p class="mb-4 text-slate-700">
+                    Im Atomkern ballen sich Protonen und Neutronen zu einem dichten, fast runden Klumpen zusammen. Da alle Protonen positiv geladen sind, stoßen sie sich gegenseitig ab (wie zwei gleiche Magnetpole). Die Neutronen wirken als eine Art "Kleber", der diesen Kern zusammenhält. 
+                </p>
+                
+                <div class="bg-red-50 p-4 border-l-4 border-red-500 mb-4 rounded text-sm text-red-900">
+                    <strong>Das Ungleichgewicht:</strong> Damit der Kern stabil bleibt, braucht es ein perfektes Mischungsverhältnis. Gibt es zu wenige oder zu viele Neutronen im Kern, herrscht ein <strong>Ungleichgewicht</strong>. Der Kern fängt an zu "wackeln" und wird instabil.
+                </div>
+
+                <p class="mb-4 text-slate-700">
+                    So hat z.B. normaler Kohlenstoff (C-12) genau 6 Protonen und 6 Neutronen. Er ist im perfekten Gleichgewicht. Hat er aber plötzlich 8 Neutronen (C-14), ist das Verhältnis gestört – er wackelt und ist instabil.
+                </p>
+
+                <h3 class="text-xl font-bold text-blue-700 mb-2">Das Problem mit riesigen Kernen</h3>
+                <p class="mb-4 text-slate-700">
+                    Hinzu kommt: Je mehr Bausteine ein Atomkern besitzt, desto höher ist die Wahrscheinlichkeit, dass er instabil wird. Ab einer bestimmten Größe (wie beim Uran) gibt es so extrem viele Protonen, dass deren Abstoßungskraft gigantisch wird. Dann reicht selbst der beste "Neutronen-Kleber" nicht mehr aus, um den riesigen Klumpen dauerhaft zusammenzuhalten.
+                </p>
+                <div class="bg-slate-100 p-4 rounded italic text-sm">
+                    <strong>Die Lösung des Atoms:</strong> Um nicht völlig zu zerreißen und wieder stabil zu werden, "spuckt" der instabile Kern blitzschnell Bausteine aus. <strong>Genau das ist Radioaktivität!</strong>
+                </div>
+            </div>
+            
+            <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
+                <h3 class="font-bold text-lg mb-2 text-slate-700">Animation: Warum wird ein Kern instabil?</h3>
+                <p class="text-sm text-slate-500 mb-4 text-center">Betrachte die dichten Klumpen. Wann wird die Anordnung instabil?</p>
+                <canvas id="canvas-2" width="500" height="300"></canvas>
+                
+                <div class="flex space-x-1 w-full mt-4">
+                    <button onclick="setSlide2State('c12')" id="btn-s2-c12" class="flex-1 bg-green-600 text-white font-bold py-2 px-1 rounded-lg shadow transition-colors text-xs">Kohlenstoff-12<br><span class="font-normal opacity-80">Stabil</span></button>
+                    <button onclick="setSlide2State('c14')" id="btn-s2-c14" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2 px-1 rounded-lg shadow transition-colors text-xs">Kohlenstoff-14<br><span class="font-normal opacity-80">Ungleichgewicht</span></button>
+                    <button onclick="setSlide2State('uranium')" id="btn-s2-uranium" class="flex-1 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold py-2 px-1 rounded-lg shadow transition-colors text-xs">Uran-235<br><span class="font-normal opacity-80">Viel zu groß</span></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= S L I D E  3: Alphastrahlung ================= -->
+        <div id="slide-3" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-3xl font-bold text-red-600 mb-2 flex items-center">
+                    <span class="text-4xl mr-3">α</span> Alphastrahlung
+                </h2>
+                <h3 class="text-lg text-slate-500 font-medium mb-6">Metapher: Die "Bowlingkugel"</h3>
+                
+                <p class="mb-4 text-slate-700">
+                    Ein Alphazerfall tritt typischerweise bei den extrem großen Atomkernen auf. Um die enorme Abstoßung schnell zu verringern, schnürt der Kern ein ganzes "Paket" ab und stößt es wuchtig nach draußen.
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-3 text-slate-700">
+                    <li><strong>Woraus besteht sie?</strong> Das abgestoßene Paket ist ein Helium-Atomkern. Es besteht exakt aus <strong>2 Protonen und 2 Neutronen</strong>. Er ist zweifach positiv geladen.</li>
+                    <li><strong>Kinetische Energie:</strong> Das Alphateilchen hat die größte Masse und verlässt den Kern mit enormer Wucht. Es besitzt die <strong>meiste kinetische Energie</strong> (Bewegungsenergie) von allen Strahlungsarten. Daher fliegt es aber auch relativ langsam.</li>
+                    <li><strong>Abschirmung:</strong> Stell dir eine fliegende Bowlingkugel vor, die auf ein Netz trifft. Wegen ihrer Größe kollidiert sie sofort mit den Hindernissen in der Luft und verliert ihre Energie. <strong>Ein gewöhnliches Blatt Papier reicht völlig aus, um sie zu stoppen.</strong></li>
+                </ul>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
+                <h3 class="font-bold text-lg mb-2 text-slate-700">Demonstration: Alphazerfall</h3>
+                <p class="text-sm text-slate-500 mb-4 text-center">Ein dicker Teilchen-Klumpen löst sich direkt aus dem Kern und prallt gegen das Papier.</p>
+                <canvas id="canvas-3" width="500" height="300"></canvas>
+                <button onclick="triggerDecay(3)" class="mt-4 w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">α-Zerfall auslösen</button>
+            </div>
+        </div>
+
+        <!-- ================= S L I D E  4: Betastrahlung ================= -->
+        <div id="slide-4" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-3xl font-bold text-blue-600 mb-2 flex items-center">
+                    <span class="text-4xl mr-3">β</span> Betastrahlung
+                </h2>
+                <h3 class="text-lg text-slate-500 font-medium mb-6">Metapher: Die "Stecknadel"</h3>
+                
+                <p class="mb-4 text-slate-700">
+                    Betastrahlung ist die Lösung des Atoms für das <strong>Ungleichgewicht</strong> (z.B. bei Kohlenstoff-14). Der Kern hat zu viele Neutronen. Um das Verhältnis zu reparieren, passiert etwas Verrücktes:
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-3 text-slate-700">
+                    <li><strong>Die Wandlung:</strong> Ein neutrales <strong>Neutron im Kern wandelt sich um!</strong> Es wird zu einem positiven Proton (welches im Kern bleibt) und erzeugt dabei ein winziges, negatives Elektron, das wie aus einem Gewehr herausgeschossen wird. Betastrahlung besteht also aus extrem schnellen Elektronen.</li>
+                    <li><strong>Kinetische Energie:</strong> Das winzige Elektron ist zigtausendmal leichter als ein Alphateilchen. Es besitzt <strong>weniger kinetische Energie</strong> als die Alphastrahlung, macht das aber durch seine enorme Geschwindigkeit wett.</li>
+                    <li><strong>Abschirmung:</strong> Wie eine fliegende Stecknadel schießt das winzige Elektron problemlos durch ein Blatt Papier hindurch. Um es zu stoppen, braucht man schon ein dichtes Material wie <strong>einige Millimeter dickes Aluminiumblech.</strong></li>
+                </ul>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
+                <h3 class="font-bold text-lg mb-2 text-slate-700">Demonstration: Betazerfall</h3>
+                <p class="text-sm text-slate-500 mb-4 text-center">Achte genau auf den Kern: Ein graues Neutron wandelt sich in ein rotes Proton um und spuckt das blaue Elektron aus!</p>
+                <canvas id="canvas-4" width="500" height="300"></canvas>
+                <button onclick="triggerDecay(4)" class="mt-4 w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">β-Zerfall auslösen</button>
+            </div>
+        </div>
+
+        <!-- ================= S L I D E  5: Gammastrahlung ================= -->
+        <div id="slide-5" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-3xl font-bold text-yellow-500 mb-2 flex items-center">
+                    <span class="text-4xl mr-3">γ</span> Gammastrahlung
+                </h2>
+                <h3 class="text-lg text-slate-500 font-medium mb-6">Metapher: Der "Lichtblitz"</h3>
+                
+                <p class="mb-4 text-slate-700">
+                    Ein wichtiger Fakt: Gammastrahlung ist meistens ein <strong>Nebenprodukt</strong>. Sie tritt fast immer *nach* einem Alpha- oder Betazerfall auf.
+                </p>
+                <ul class="list-disc pl-5 mb-6 space-y-3 text-slate-700">
+                    <li><strong>Die Entstehung:</strong> Nachdem der Kern ein Teilchen ausgespuckt hat, ist er oft noch stark aufgewühlt ("angeregt"). Er wackelt. Um sich endgültig zu beruhigen, strahlt er die restliche überschüssige Energie einfach als kurzes Wellenpaket ab.</li>
+                    <li><strong>Kinetische Energie & Energieverlust:</strong> Da Gammastrahlung keine Masse hat, besitzt sie im klassischen Sinne <strong>am wenigsten (bzw. gar keine) kinetische Energie</strong>. Sie ist reine Photonenenergie.</li>
+                    <li><strong>Abschirmung:</strong> Energie ohne Masse aufzuhalten, ist sehr schwer. Papier und Alu durchschlägt sie blitzartig. Wenn sie jedoch durch dicke Materialien wie <strong>Blei oder Beton</strong> geht, wird sie nicht hart gestoppt, sondern <strong>verliert ihre Energie</strong> an das Material. Sie wird massiv abgeschwächt (in der Animation verblasst sie).</li>
+                </ul>
+            </div>
+            <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
+                <h3 class="font-bold text-lg mb-2 text-slate-700">Demonstration: Gamma als Begleiter</h3>
+                <p class="text-sm text-slate-500 mb-4 text-center">Der Kern macht erst einen Alpha-Zerfall. Danach entlädt er ein kurzes Gamma-Wellenpaket. Achte darauf, wie die Welle im Blei schwächer wird!</p>
+                <canvas id="canvas-5" width="500" height="300"></canvas>
+                <button onclick="triggerDecay(5)" class="mt-4 w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">Zerfallsreihe auslösen</button>
+            </div>
+        </div>
+
+        <!-- ================= S L I D E  6: Quiz & Pufferaufgabe ================= -->
+        <div id="slide-6" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Linke Seite: Quiz -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6">6. Wissenstest</h2>
+                
+                <div class="space-y-4">
+                    <div class="bg-slate-50 p-4 rounded-lg border">
+                        <p class="font-bold text-sm text-slate-700 mb-2">Frage 1: Welche Strahlung hat die meiste kinetische Energie?</p>
+                        <select id="q1" class="w-full p-2 border rounded focus:ring-2 ring-slate-400 text-sm">
+                            <option value="">Bitte wählen...</option>
+                            <option value="f1">Gammastrahlung</option>
+                            <option value="r">Alphastrahlung (da am schwersten)</option>
+                            <option value="f2">Betastrahlung</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-lg border">
+                        <p class="font-bold text-sm text-slate-700 mb-2">Frage 2: Was passiert mit Gammastrahlung in einem Bleiblock?</p>
+                        <select id="q2" class="w-full p-2 border rounded focus:ring-2 ring-slate-400 text-sm">
+                            <option value="">Bitte wählen...</option>
+                            <option value="f1">Sie prallt wie eine Bowlingkugel sofort ab.</option>
+                            <option value="r">Sie dringt ein, verliert aber stetig an Energie und wird stark abgeschwächt.</option>
+                            <option value="f2">Sie wandelt sich in Betastrahlung um.</option>
+                        </select>
+                    </div>
+                    
+                    <div class="bg-slate-50 p-4 rounded-lg border">
+                        <p class="font-bold text-sm text-slate-700 mb-2">Frage 3: Welche Strahlung hat keine Ladung und keine Masse?</p>
+                        <select id="q3" class="w-full p-2 border rounded focus:ring-2 ring-slate-400 text-sm">
+                            <option value="">Bitte wählen...</option>
+                            <option value="f1">Alphastrahlung</option>
+                            <option value="f2">Betastrahlung</option>
+                            <option value="r">Gammastrahlung</option>
+                        </select>
+                    </div>
+
+                    <button onclick="checkQuiz()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-lg transition">Test Auswerten</button>
+                    <div id="quiz-feedback" class="hidden p-4 rounded-lg font-bold text-sm"></div>
+                </div>
+            </div>
+
+            <!-- Rechte Seite: Labor -->
+            <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
+                <h2 class="text-xl font-bold text-slate-800 mb-2">Das freie Schutzschild-Labor</h2>
+                <p class="text-slate-600 mb-4 text-xs">Teste alle Materialien kreuz und quer mit den verschiedenen Strahlen.</p>
+                
+                <div class="flex-grow flex items-center justify-center mb-6">
+                    <canvas id="canvas-6" width="500" height="300"></canvas>
+                </div>
+
+                <div class="space-y-4 text-sm">
+                    <div>
+                        <span class="font-semibold block mb-1">1. Schutzschild in der Mitte:</span>
+                        <div class="flex space-x-1">
+                            <button onclick="setLabShield(0)" id="btn-lab-0" class="flex-1 py-2 bg-slate-200 rounded">Keins</button>
+                            <button onclick="setLabShield(1)" id="btn-lab-1" class="flex-1 py-2 bg-white border border-slate-300 rounded">Papier</button>
+                            <button onclick="setLabShield(2)" id="btn-lab-2" class="flex-1 py-2 bg-gray-300 rounded">Aluminium</button>
+                            <button onclick="setLabShield(3)" id="btn-lab-3" class="flex-1 py-2 bg-slate-800 text-white rounded">Blei</button>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="font-semibold block mb-1">2. Strahlung aus dem Kern feuern:</span>
+                        <div class="flex space-x-1">
+                            <button onclick="triggerLabDecay('alpha')" class="flex-1 py-3 bg-red-100 hover:bg-red-200 text-red-700 rounded font-bold shadow-sm active:scale-95 transition">α</button>
+                            <button onclick="triggerLabDecay('beta')" class="flex-1 py-3 bg-blue-100 hover:bg-blue-200 text-blue-700 rounded font-bold shadow-sm active:scale-95 transition">β</button>
+                            <button onclick="triggerLabDecay('gamma')" class="flex-1 py-3 bg-yellow-100 hover:bg-yellow-200 text-yellow-700 rounded font-bold shadow-sm active:scale-95 transition">γ</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer Navigation -->
+    <footer class="bg-white border-t border-slate-200 p-4 sticky bottom-0 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <button id="btn-prev" onclick="changeSlide(-1)" class="nav-btn bg-slate-200 text-slate-800 px-6 py-3 rounded-lg font-bold" disabled>Zurück</button>
+            <span class="text-sm text-slate-500 hidden md:block">Blättere durch die Seiten</span>
+            <button id="btn-next" onclick="changeSlide(1)" class="nav-btn bg-blue-600 text-white px-6 py-3 rounded-lg font-bold shadow-md">Weiter</button>
+        </div>
+    </footer>
+
+    <script>
+        // --- Navigation Logic ---
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function changeSlide(direction) {
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            currentSlide += direction;
+            if (currentSlide < 1) currentSlide = 1;
+            if (currentSlide > totalSlides) currentSlide = totalSlides;
+
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            document.getElementById('page-indicator').innerText = currentSlide;
+            document.getElementById('btn-prev').disabled = currentSlide === 1;
+            document.getElementById('btn-next').disabled = currentSlide === totalSlides;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+
+        // --- Global Config & Colors ---
+        const PROTON_COLOR = '#ef4444'; 
+        const NEUTRON_COLOR = '#94a3b8'; 
+        const ELECTRON_COLOR = '#3b82f6'; 
+        const GAMMA_COLOR = '#facc15'; 
+
+        // --- Helper: Draw Shield ---
+        function drawShield(ctx, type, posX) {
+            if (type === 0) return;
+            ctx.fillStyle = type === 1 ? '#f8fafc' : type === 2 ? '#cbd5e1' : '#334155';
+            ctx.strokeStyle = '#64748b'; ctx.lineWidth = 2;
+            const width = type === 1 ? 10 : type === 2 ? 30 : 60;
+            ctx.fillRect(posX, 50, width, 200); ctx.strokeRect(posX, 50, width, 200);
+            ctx.fillStyle = type === 3 ? 'white' : 'black'; ctx.font = '14px sans-serif'; ctx.textAlign = 'center';
+            const label = type === 1 ? 'Papier/Glas' : type === 2 ? 'Alu' : 'Blei / Beton';
+            ctx.save(); ctx.translate(posX + width/2, 150); ctx.rotate(-Math.PI/2); ctx.fillText(label, 0, 5); ctx.restore();
+        }
+
+        // --- Helper: Dichter Klumpen Generator (Tröpfchen/Weintrauben) ---
+        function generateClump(total, protons, radiusMultiplier) {
+            let cluster = [];
+            const phi = Math.PI * (3 - Math.sqrt(5)); 
+            
+            let types = [];
+            let pCount = 0;
+            for(let i=0; i<total; i++) {
+                let expectedP = (i + 1) * (protons / total);
+                if (pCount < expectedP) { types.push('p'); pCount++; } else { types.push('n'); }
+            }
+
+            for(let i=0; i<total; i++) {
+                let c = radiusMultiplier / Math.sqrt(total);
+                let r = c * Math.sqrt(i);
+                let theta = i * phi;
+                cluster.push({ x: Math.cos(theta) * r, y: Math.sin(theta) * r, type: types[i] });
+            }
+            
+            cluster.forEach(p => {
+                p.x += (Math.random() - 0.5) * (radiusMultiplier * 0.12);
+                p.y += (Math.random() - 0.5) * (radiusMultiplier * 0.12);
+            });
+
+            cluster.sort((a,b) => a.y - b.y);
+
+            let outerNeutrons = cluster.filter(p => p.type === 'n').sort((a,b) => (b.x*b.x+b.y*b.y) - (a.x*a.x+a.y*a.y));
+            if(outerNeutrons.length > 0) outerNeutrons[0].isTarget = true;
+            
+            return cluster;
+        }
+
+        const baseCluster = generateClump(16, 8, 14); 
+        const c12Cluster = generateClump(12, 6, 12);
+        const c14Cluster = generateClump(14, 6, 13);
+        const uraniumCluster = generateClump(110, 45, 33); 
+
+        // --- Helper: Draw Nucleus Klumpen ---
+        function drawNucleus(ctx, x, y, scale = 1, wobble = false, cluster, transformTarget = false) {
+            const time = Date.now() / 100;
+            const offsetX = wobble ? Math.sin(time*2) * 2 : 0;
+            const offsetY = wobble ? Math.cos(time*3) * 1.5 : 0;
+            
+            ctx.save(); ctx.translate(x + offsetX, y + offsetY); ctx.scale(scale, scale);
+            
+            cluster.forEach((p) => {
+                let jX = wobble && cluster.length > 50 ? (Math.random() - 0.5) * 1.0 : 0;
+                let jY = wobble && cluster.length > 50 ? (Math.random() - 0.5) * 1.0 : 0;
+                
+                let cType = p.type;
+                if (p.isTarget && transformTarget) cType = 'p';
+
+                ctx.beginPath(); 
+                let nucRadius = cluster.length > 50 ? 4.5 : 6.5; 
+                ctx.arc(p.x + jX, p.y + jY, nucRadius, 0, Math.PI*2);
+                ctx.fillStyle = cType === 'p' ? PROTON_COLOR : NEUTRON_COLOR; 
+                
+                if (cluster === c14Cluster && p.isTarget && wobble && Math.sin(time*1.5) > 0) {
+                    ctx.fillStyle = '#fca5a5';
+                }
+
+                ctx.fill();
+                ctx.strokeStyle = 'rgba(0,0,0,0.5)'; ctx.lineWidth = 1; ctx.stroke();
+
+                ctx.beginPath();
+                ctx.arc(p.x + jX - 2, p.y + jY - 2, nucRadius * 0.3, 0, Math.PI*2);
+                ctx.fillStyle = 'rgba(255,255,255,0.4)';
+                ctx.fill();
+            });
+            ctx.restore();
+        }
+
+        // ==========================================
+        // SLIDE 1: Atombau Zoom Animation
+        // ==========================================
+        const ctx1 = document.getElementById('canvas-1').getContext('2d');
+        let zoomState = { time: 0 };
+        function restartZoomAnim() { zoomState.time = 0; }
+
+        function renderSlide1() {
+            ctx1.clearRect(0, 0, 500, 300);
+            zoomState.time += 0.01;
+            const t = zoomState.time % 10; 
+            let scale = 1;
+            const overlay = document.getElementById('anim-overlay-1');
+
+            if (t < 2) {
+                scale = 2.5; overlay.innerText = "Der dichte Atomkern (Protonen & Neutronen)";
+            } else if (t < 4) {
+                const progress = (t - 2) / 2; scale = 2.5 - (progress * 2.45); 
+                overlay.innerText = "Zoomt extrem weit heraus...";
+            } else if (t < 9) {
+                scale = 0.05; overlay.innerText = "Die Hülle (Elektronen) - Fast nur leerer Raum!";
+                ctx1.save(); ctx1.translate(250, 150);
+                ctx1.strokeStyle = 'rgba(255,255,255,0.15)'; ctx1.lineWidth = 1;
+                ctx1.beginPath(); ctx1.ellipse(0, 0, 200, 80, 0, 0, Math.PI*2); ctx1.stroke();
+                ctx1.beginPath(); ctx1.ellipse(0, 0, 200, 80, Math.PI/3, 0, Math.PI*2); ctx1.stroke();
+                ctx1.beginPath(); ctx1.ellipse(0, 0, 200, 80, -Math.PI/3, 0, Math.PI*2); ctx1.stroke();
+
+                const eTime = Date.now() / 500;
+                const drawElectron = (aOff, eRot) => {
+                    const x = Math.cos(eTime + aOff) * 200; const y = Math.sin(eTime + aOff) * 80;
+                    ctx1.save(); ctx1.rotate(eRot); ctx1.translate(x, y);
+                    ctx1.beginPath(); ctx1.arc(0, 0, 1.0, 0, Math.PI*2); 
+                    ctx1.fillStyle = ELECTRON_COLOR; ctx1.shadowColor = ELECTRON_COLOR; ctx1.shadowBlur = 4; ctx1.fill();
+                    ctx1.restore();
+                }
+                drawElectron(0, 0); drawElectron(2, Math.PI/3); drawElectron(4, -Math.PI/3);
+                ctx1.restore();
+
+                ctx1.fillStyle = 'rgba(255,255,255,0.7)';
+                ctx1.font = '11px sans-serif';
+                ctx1.textAlign = 'center';
+                ctx1.fillText("* Elektronen sind in Realität noch VIEL kleiner (hier zur Sichtbarkeit vergrößert)", 250, 280);
+
+            } else {
+                scale = 0.05; overlay.innerText = "Neustart...";
+            }
+            drawNucleus(ctx1, 250, 150, scale, false, baseCluster);
+        }
+
+        // ==========================================
+        // SLIDE 2: Instabilität
+        // ==========================================
+        const ctx2 = document.getElementById('canvas-2').getContext('2d');
+        let slide2State = 'c12'; 
+        
+        function setSlide2State(state) { 
+            slide2State = state; 
+            ['c12', 'c14', 'uranium'].forEach(id => {
+                let btn = document.getElementById(`btn-s2-${id}`);
+                btn.classList.remove('bg-green-600', 'text-white', 'bg-red-600');
+                btn.classList.add('bg-slate-200', 'text-slate-800');
+            });
+            let activeBtn = document.getElementById(`btn-s2-${state}`);
+            activeBtn.classList.remove('bg-slate-200', 'text-slate-800');
+            if(state === 'c12') activeBtn.classList.add('bg-green-600', 'text-white');
+            else activeBtn.classList.add('bg-red-600', 'text-white');
+        }
+
+        function renderSlide2() {
+            ctx2.clearRect(0, 0, 500, 300);
+            
+            if (slide2State === 'c12') {
+                const floatY = Math.sin(Date.now() / 500) * 3;
+                drawNucleus(ctx2, 250, 150 + floatY, 1.8, false, c12Cluster);
+                ctx2.fillStyle = 'rgba(255,255,255,0.7)'; ctx2.font = '14px sans-serif'; ctx2.textAlign = 'center';
+                ctx2.fillText("Gleichgewicht: 6 Protonen, 6 Neutronen", 250, 240);
+
+            } else if (slide2State === 'c14') {
+                drawNucleus(ctx2, 250, 150, 1.8, true, c14Cluster);
+                ctx2.fillStyle = 'rgba(255,100,100,0.9)'; ctx2.font = 'bold 14px sans-serif'; ctx2.textAlign = 'center';
+                ctx2.fillText("Ungleichgewicht! Zu viele Neutronen (8)", 250, 240);
+
+            } else {
+                drawNucleus(ctx2, 250, 150, 1.5, true, uraniumCluster);
+                if (Math.random() > 0.4) {
+                    ctx2.save(); ctx2.translate(250,150); ctx2.scale(1.5, 1.5);
+                    ctx2.strokeStyle = 'rgba(255, 50, 50, 0.9)'; ctx2.lineWidth = 2.5; ctx2.beginPath();
+                    let p1 = uraniumCluster[Math.floor(Math.random()*110)];
+                    let p2 = uraniumCluster[Math.floor(Math.random()*110)];
+                    if(p1.type==='p' && p2.type==='p') {
+                        ctx2.moveTo(p1.x, p1.y);
+                        ctx2.lineTo(p1.x + (p2.x-p1.x)*0.5 + (Math.random()*10-5), p1.y + (p2.y-p1.y)*0.5 + (Math.random()*10-5));
+                        ctx2.lineTo(p2.x, p2.y); ctx2.stroke();
+                    }
+                    ctx2.restore();
+                }
+                ctx2.fillStyle = 'rgba(255,100,100,0.9)'; ctx2.font = 'bold 14px sans-serif'; ctx2.textAlign = 'center';
+                ctx2.fillText("Extrem Instabil: Die Abstoßung ist zu stark!", 250, 260);
+            }
+        }
+
+        // ==========================================
+        // SLIDE 3, 4, 5: Spezifische Zerfälle
+        // ==========================================
+        const contextsDecay = {
+            3: document.getElementById('canvas-3').getContext('2d'),
+            4: document.getElementById('canvas-4').getContext('2d'),
+            5: document.getElementById('canvas-5').getContext('2d')
+        };
+        let activeDecays = { 3: null, 4: null, 5: null };
+
+        function triggerDecay(slide) {
+            if (slide === 3) activeDecays[3] = { phase: 'break', x: 100, y: 150, time: 0, shieldX: 350 }; 
+            if (slide === 4) activeDecays[4] = { phase: 'transform', x: 100, y: 150, time: 0, shieldX: 350 }; 
+            if (slide === 5) activeDecays[5] = { phase: 'alpha', x: 100, y: 150, time: 0, alphaX: 100, shieldX: 400 }; 
+        }
+
+        function renderSlide3() {
+            const ctx = contextsDecay[3]; ctx.clearRect(0, 0, 500, 300);
+            const nX = 100; const nY = 150; const sX = 350;
+            drawShield(ctx, 1, sX); 
+            let d = activeDecays[3];
+            
+            if (!d) { drawNucleus(ctx, nX, nY, 1.5, false, baseCluster); } 
+            else {
+                d.time++;
+                let wobble = d.time < 30; drawNucleus(ctx, nX, nY, 1.5, wobble, baseCluster);
+                if (d.time > 30) {
+                    d.x += 4; 
+                    if (d.x >= sX - 20) d.x = sX - 20;
+                    ctx.save(); ctx.translate(d.x, d.y);
+                    
+                    ctx.beginPath(); ctx.arc(-4, -4, 5.5, 0, Math.PI*2); ctx.fillStyle = PROTON_COLOR; ctx.fill(); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(4, -4, 5.5, 0, Math.PI*2); ctx.fillStyle = NEUTRON_COLOR; ctx.fill(); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(-4, 4, 5.5, 0, Math.PI*2); ctx.fillStyle = NEUTRON_COLOR; ctx.fill(); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(4, 4, 5.5, 0, Math.PI*2); ctx.fillStyle = PROTON_COLOR; ctx.fill(); ctx.stroke();
+                    
+                    ctx.restore();
+                }
+                if (d.time > 600) activeDecays[3] = null;
+            }
+        }
+
+        function renderSlide4() {
+            const ctx = contextsDecay[4]; ctx.clearRect(0, 0, 500, 300);
+            const nX = 100; const nY = 150;
+            drawShield(ctx, 1, 200); drawShield(ctx, 2, 350); 
+            
+            let d = activeDecays[4];
+            if (!d) { drawNucleus(ctx, nX, nY, 1.5, false, baseCluster, false); } 
+            else {
+                d.time++;
+                let neutronTransformed = d.time > 40;
+                drawNucleus(ctx, nX, nY, 1.5, d.time < 40, baseCluster, neutronTransformed); 
+                if (d.time > 40) {
+                    d.x += 12; if (d.x >= 350 - 5) d.x = 350 - 5; 
+                    ctx.beginPath(); ctx.arc(d.x, d.y + (Math.sin(d.time)*5), 5, 0, Math.PI*2); 
+                    ctx.fillStyle = ELECTRON_COLOR; ctx.shadowColor = ELECTRON_COLOR; ctx.shadowBlur = 10; ctx.fill(); ctx.shadowBlur = 0;
+                }
+                if (d.time > 600) activeDecays[4] = null;
+            }
+        }
+
+        function renderSlide5() {
+            const ctx = contextsDecay[5]; ctx.clearRect(0, 0, 500, 300);
+            const nX = 100; const nY = 150;
+            drawShield(ctx, 1, 200); drawShield(ctx, 2, 280); drawShield(ctx, 3, 400); 
+            
+            let d = activeDecays[5];
+            if (!d) { drawNucleus(ctx, nX, nY, 1.5, false, baseCluster); } 
+            else {
+                d.time++;
+                let excited = d.time < 120; drawNucleus(ctx, nX, nY, 1.5, excited, baseCluster);
+                if (d.time > 20 && d.time < 200) {
+                    d.alphaX += 4; if (d.alphaX > 200 - 20) d.alphaX = 200 - 20; 
+                    ctx.save(); ctx.translate(d.alphaX, d.y - 20); 
+                    ctx.beginPath(); ctx.arc(-4, -4, 5.5, 0, Math.PI*2); ctx.fillStyle = PROTON_COLOR; ctx.fill(); ctx.stroke();
+                    ctx.beginPath(); ctx.arc(4, 4, 5.5, 0, Math.PI*2); ctx.fillStyle = PROTON_COLOR; ctx.fill(); ctx.stroke();
+                    ctx.restore();
+                }
+                if (d.time > 120) {
+                    d.x += 14; 
+                    let shieldX = 400; // Position Blei/Beton
+                    
+                    let waveLen = 40;
+                    let startX = Math.max(nX + 20, d.x - waveLen);
+                    
+                    // Zeichne den vollen (starken) Teil der Welle vor dem Bleiblock
+                    ctx.beginPath();
+                    for(let w = startX; w <= d.x; w += 3) {
+                        if (w > shieldX) continue;
+                        let yOffset = Math.sin((w - d.time*15) * 0.4) * 8;
+                        if (w === startX) ctx.moveTo(w, nY + yOffset);
+                        else ctx.lineTo(w, nY + yOffset);
+                    }
+                    ctx.strokeStyle = GAMMA_COLOR; ctx.lineWidth = 3; ctx.stroke();
+
+                    // Zeichne den schwachen (energieverlorenen) Teil der Welle nach/in dem Bleiblock
+                    if (d.x > shieldX) {
+                        ctx.beginPath();
+                        let startWeakX = Math.max(startX, shieldX);
+                        for(let w = startWeakX; w <= d.x; w += 3) {
+                            let yOffset = Math.sin((w - d.time*15) * 0.4) * 8;
+                            if (w === startWeakX) ctx.moveTo(w, nY + yOffset);
+                            else ctx.lineTo(w, nY + yOffset);
+                        }
+                        ctx.strokeStyle = 'rgba(250, 204, 21, 0.15)'; // Nahezu null Durchsichtigkeit
+                        ctx.lineWidth = 3; ctx.stroke();
+                    }
+                }
+                if (d.time > 600) activeDecays[5] = null;
+            }
+        }
+
+        // ==========================================
+        // SLIDE 6: Freies Labor
+        // ==========================================
+        const ctx6 = document.getElementById('canvas-6').getContext('2d');
+        let labShield = 0;
+        let labParticles = []; 
+        
+        function setLabShield(type) {
+            labShield = type;
+            for(let i=0; i<=3; i++) {
+                let btn = document.getElementById(`btn-lab-${i}`);
+                if(i === type) { btn.classList.add('ring-2', 'ring-blue-500'); btn.classList.remove('bg-white','bg-slate-200','bg-gray-300','text-slate-800'); btn.classList.add('bg-blue-600','text-white');}
+                else { btn.classList.remove('ring-2', 'ring-blue-500','bg-blue-600','text-white'); 
+                       if(i===0) btn.classList.add('bg-slate-200','text-slate-800');
+                       if(i===1) btn.classList.add('bg-white','text-slate-800');
+                       if(i===2) btn.classList.add('bg-gray-300','text-slate-800');
+                       if(i===3) btn.classList.add('bg-slate-800','text-white');
+                }
+            }
+        }
+
+        function triggerLabDecay(type) {
+            let startY = 150 + (Math.random() * 20 - 10);
+            let p = { type: type, x: 120, y: startY, active: true, time: 0 };
+            if (type === 'alpha') { p.speed = 4; p.radius = 12; }
+            if (type === 'beta') { p.speed = 12; p.radius = 5; }
+            if (type === 'gamma') { p.speed = 18; p.radius = 2; }
+            labParticles.push(p);
+            activeDecays[6] = { time: 0 };
+        }
+
+        function renderSlide6() {
+            ctx6.clearRect(0, 0, 500, 300);
+            const nX = 100; const nY = 150; const sX = 350;
+            drawShield(ctx6, labShield, sX);
+            
+            let wobble = activeDecays[6] && activeDecays[6].time < 15;
+            if(activeDecays[6]) activeDecays[6].time++;
+            drawNucleus(ctx6, nX, nY, 1.5, wobble, baseCluster);
+
+            for (let i = labParticles.length - 1; i >= 0; i--) {
+                let p = labParticles[i];
+                p.time++;
+                if (p.active) {
+                    p.x += p.speed;
+                    if (labShield > 0 && p.x + p.radius >= sX) {
+                        let stopped = false;
+                        if (p.type === 'alpha' && labShield >= 1) stopped = true;
+                        if (p.type === 'beta' && labShield >= 2) stopped = true;
+                        // Gamma wird nicht hart gestoppt, sondern verblasst!
+                        if (stopped) { p.x = sX - p.radius; p.active = false; }
+                    }
+                }
+                if (p.type === 'gamma') {
+                    let shieldX = (labShield === 3) ? sX : 999; // Gamma verblasst nur im Blei (Typ 3)
+                    let waveLen = 40;
+                    let startX = Math.max(nX + 20, p.x - waveLen);
+                    
+                    // Starker Teil der Welle
+                    ctx6.beginPath();
+                    for(let w = startX; w <= p.x; w += 3) {
+                        if (w > shieldX) continue;
+                        let yOffset = Math.sin((w - p.time*15) * 0.4) * 8;
+                        if (w === startX) ctx6.moveTo(w, p.y + yOffset);
+                        else ctx6.lineTo(w, p.y + yOffset);
+                    }
+                    ctx6.strokeStyle = GAMMA_COLOR; ctx6.lineWidth = 3; ctx6.stroke();
+
+                    // Schwacher Teil der Welle im/nach dem Blei
+                    if (p.x > shieldX) {
+                        ctx6.beginPath();
+                        let startWeakX = Math.max(startX, shieldX);
+                        for(let w = startWeakX; w <= p.x; w += 3) {
+                            let yOffset = Math.sin((w - p.time*15) * 0.4) * 8;
+                            if (w === startWeakX) ctx6.moveTo(w, p.y + yOffset);
+                            else ctx6.lineTo(w, p.y + yOffset);
+                        }
+                        ctx6.strokeStyle = 'rgba(250, 204, 21, 0.15)'; 
+                        ctx6.lineWidth = 3; ctx6.stroke();
+                    }
+                } else if (p.type === 'beta') {
+                    ctx6.beginPath(); ctx6.arc(p.x, p.y, p.radius, 0, Math.PI*2); ctx6.fillStyle = ELECTRON_COLOR; ctx6.fill();
+                } else if (p.type === 'alpha') {
+                    ctx6.save(); ctx6.translate(p.x, p.y);
+                    ctx6.beginPath(); ctx6.arc(-4, -4, 5.5, 0, Math.PI*2); ctx6.fillStyle = PROTON_COLOR; ctx6.fill(); ctx6.stroke();
+                    ctx6.beginPath(); ctx6.arc(4, -4, 5.5, 0, Math.PI*2); ctx6.fillStyle = NEUTRON_COLOR; ctx6.fill(); ctx6.stroke();
+                    ctx6.beginPath(); ctx6.arc(-4, 4, 5.5, 0, Math.PI*2); ctx6.fillStyle = NEUTRON_COLOR; ctx6.fill(); ctx6.stroke();
+                    ctx6.beginPath(); ctx6.arc(4, 4, 5.5, 0, Math.PI*2); ctx6.fillStyle = PROTON_COLOR; ctx6.fill(); ctx.stroke();
+                    ctx6.restore();
+                }
+                if (p.x > 550) labParticles.splice(i, 1);
+            }
+        }
+
+        // --- Main Animation Loop ---
+        function mainLoop() {
+            if (currentSlide === 1) renderSlide1();
+            if (currentSlide === 2) renderSlide2();
+            if (currentSlide === 3) renderSlide3();
+            if (currentSlide === 4) renderSlide4();
+            if (currentSlide === 5) renderSlide5();
+            if (currentSlide === 6) renderSlide6();
+            requestAnimationFrame(mainLoop);
+        }
+        mainLoop();
+
+        // --- Quiz Auswertung ---
+        function checkQuiz() {
+            const q1 = document.getElementById('q1').value;
+            const q2 = document.getElementById('q2').value;
+            const q3 = document.getElementById('q3').value;
+            const fb = document.getElementById('quiz-feedback');
+            
+            fb.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
+
+            if(q1 === "" || q2 === "" || q3 === "") {
+                fb.classList.add('bg-red-100', 'text-red-800');
+                fb.innerText = "Bitte beantworte erst alle Fragen!";
+                return;
+            }
+
+            let correct = 0;
+            if(q1 === "r") correct++;
+            if(q2 === "r") correct++;
+            if(q3 === "r") correct++;
+
+            if(correct === 3) {
+                fb.classList.add('bg-green-100', 'text-green-800');
+                fb.innerText = "🎉 Perfekt! Du hast alle Fragen verstanden und richtig beantwortet.";
+            } else {
+                fb.classList.add('bg-red-100', 'text-red-800');
+                fb.innerText = `Du hast ${correct} von 3 Fragen richtig. Lies ggf. die vorherigen Seiten noch einmal aufmerksam durch!`;
+            }
+        }
+    </script>
+</body>
+</html>
