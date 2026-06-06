@@ -207,18 +207,20 @@
                 <h2 class="text-3xl font-bold text-slate-800 mb-6">6. Wissenstest</h2>
                 
                 <div class="w-full flex-grow flex flex-col items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-8 h-[350px]">
-                    <p class="text-xl text-slate-700 mb-8 font-medium text-center">Teste dein Wissen und schließe die Einheit ab!</p>
-                    
                     <a href="https://nx72396.your-storageshare.de/apps/formvox/public/5726/jDlZdagKlE4fI0IWMdINg2MAqdKsB9Os" 
                        target="_blank" 
                        rel="noopener noreferrer" 
-                       class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-transform hover:-translate-y-1 active:scale-95 inline-flex items-center text-center">
-                        Zum Wissenstest (öffnet im neuen Fenster)
+                       class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-lg transition-transform hover:-translate-y-1 active:scale-95 inline-flex items-center text-center mb-6">
+                        Teste dein Wissen und schließe die Einheit ab!
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
                             <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
                         </svg>
                     </a>
+
+                    <button onclick="showBonusSlide()" class="bg-purple-100 hover:bg-purple-200 text-purple-800 font-semibold py-2 px-6 rounded-full shadow-sm transition-transform hover:-translate-y-1 active:scale-95 inline-flex items-center text-sm border border-purple-300">
+                        🚀 Für die ganz Schnellen
+                    </button>
                 </div>
             </div>
 
@@ -253,6 +255,21 @@
             </div>
         </div>
 
+        <!-- ================= B O N U S  S L I D E ================= -->
+        <div id="slide-bonus" class="slide grid-cols-1 gap-8">
+            <div class="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
+                <h2 class="text-3xl font-bold text-purple-700 mb-4 flex items-center">
+                    <span class="text-4xl mr-3">🚀</span> Geheimlevel: Für die ganz Schnellen!
+                </h2>
+                <p class="text-lg text-slate-700 mb-8 font-medium text-center max-w-3xl">
+                    Hier kannst du dein Wissen gegen die anderen testen, solange es noch nicht weitergeht:
+                </p>
+                <div class="w-full rounded-xl overflow-hidden shadow-inner border border-slate-200 bg-slate-100">
+                    <iframe src="https://learningapps.org/watch?v=pm0bapv1n26" style="border:0px;width:100%;height:500px" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Footer Navigation -->
@@ -268,8 +285,33 @@
         // --- Navigation Logic ---
         let currentSlide = 1;
         const totalSlides = 6;
+        let inBonus = false;
+
+        function showBonusSlide() {
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            document.getElementById('slide-bonus').classList.add('active');
+            inBonus = true;
+            document.getElementById('page-indicator').innerText = "Bonus";
+            document.getElementById('btn-prev').disabled = false;
+            document.getElementById('btn-next').disabled = true; // Im Bonuslevel geht es nicht weiter
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         function changeSlide(direction) {
+            // Wenn der Schüler im Bonuslevel ist und "Zurück" klickt
+            if (inBonus) {
+                if (direction === -1) {
+                    document.getElementById('slide-bonus').classList.remove('active');
+                    inBonus = false;
+                    document.getElementById(`slide-${currentSlide}`).classList.add('active');
+                    document.getElementById('page-indicator').innerText = currentSlide;
+                    document.getElementById('btn-prev').disabled = currentSlide === 1;
+                    document.getElementById('btn-next').disabled = currentSlide === totalSlides;
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+                return; // Verhindert andere Navigationen während das Bonuslevel aktiv ist
+            }
+
             document.getElementById(`slide-${currentSlide}`).classList.remove('active');
             currentSlide += direction;
             if (currentSlide < 1) currentSlide = 1;
