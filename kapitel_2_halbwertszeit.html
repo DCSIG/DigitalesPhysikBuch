@@ -29,44 +29,11 @@
         .nav-btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
         body { overflow-x: hidden; }
-
-        /* Grid für den Popcorn-Zerfall */
-        #popcorn-grid {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 2px;
-            width: 100%;
-            margin: 0 auto;
-        }
-        
-        .atom-dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background-color: #ef4444; /* Rot = instabil */
-            transition: background-color 0.4s ease;
-            box-shadow: 0 0 5px rgba(239,68,68,0.5);
-        }
-        
-        .atom-dot.stable {
-            background-color: #22c55e; /* Grün = stabil */
-            box-shadow: none;
-            opacity: 0.6;
-        }
-
-        @keyframes pop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.5); box-shadow: 0 0 15px #22c55e; }
-            100% { transform: scale(1); }
-        }
-        .particle-pop {
-            animation: pop 0.4s ease-out forwards;
-        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans min-h-screen flex flex-col">
 
+    <!-- Header -->
     <header class="bg-slate-900 text-white shadow-md sticky top-0 z-20">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <h1 class="text-lg md:text-2xl font-bold flex items-center">
@@ -79,8 +46,10 @@
         </div>
     </header>
 
+    <!-- Main Content Area -->
     <main class="flex-grow max-w-6xl mx-auto px-4 py-8 w-full relative">
         
+        <!-- ================= S L I D E  1: Der Zufall ================= -->
         <div id="slide-1" class="slide active grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-y-auto" style="max-height: 70vh;">
                 <h2 class="text-3xl font-bold text-slate-800 mb-6">1. Wann zerfällt ein Atomkern?</h2>
@@ -90,11 +59,11 @@
                     Wir wissen jetzt: Ein instabiler Atomkern wird irgendwann ein Teilchen ausspucken (zerfallen), um stabil zu werden. Aber die große Frage der Physik lautet: <strong>Wann genau macht er das?</strong>
                 </p>
                 <p class="mb-4 text-slate-700">
-                    Die Antwort ist für viele verblüffend: <strong>Wir wissen es nicht!</strong>
+                    Die Antwort ist für viele verblüffend: <strong>Wir wissen es nicht!</strong> Man kann ein einzelnes instabiles Atom jahrelang unter dem Mikroskop beobachten. Es könnte in der nächsten Sekunde zerfallen – oder erst in einer Million Jahren. Der Zeitpunkt des Zerfalls bei einem *einzelnen* Atom ist reiner Zufall und physikalisch unmöglich vorherzusagen.
                 </p>
 
                 <div class="bg-slate-100 p-4 border-l-4 border-slate-400 mb-4 rounded italic text-sm text-slate-700">
-                    Man kann ein einzelnes instabiles Atom jahrelang unter dem Mikroskop beobachten. Es könnte in der nächsten Sekunde zerfallen – oder erst in einer Million Jahren. Der Zeitpunkt des Zerfalls bei einem *einzelnen* Atom ist <strong>reiner Zufall</strong> und physikalisch unmöglich vorherzusagen.
+                    <strong>Das Popcorn-Beispiel:</strong> Stell dir vor, du machst Popcorn in der Mikrowelle. Du weißt ganz sicher, <em>dass</em> die Körner aufpoppen werden. Aber du kannst unmöglich vorhersagen, welches spezifische Maiskorn in genau welcher Sekunde platzt. Genau so verhalten sich instabile Atomkerne!
                 </div>
             </div>
             
@@ -111,6 +80,7 @@
             </div>
         </div>
 
+        <!-- ================= S L I D E  2: Würfelexperiment ================= -->
         <div id="slide-2" class="slide grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-y-auto" style="max-height: 70vh;">
                 <h2 class="text-3xl font-bold text-slate-800 mb-6">2. Die Menge macht das Muster</h2>
@@ -125,7 +95,7 @@
                 </p>
 
                 <div class="bg-green-50 p-4 border-l-4 border-green-500 mb-4 rounded text-sm text-green-900">
-                    <strong>Aus Zufall wird Gesetz:</strong> Bei einer gigantisch großen Menge an Atomen wird aus dem unvorhersehbaren Zufall plötzlich eine extrem verlässliche, statistische Regelmäßigkeit.
+                    <strong>Statistische Regelmäßigkeit:</strong> Bei einer gigantisch großen Menge an Atomen wird aus dem unvorhersehbaren Zufall des Einzelnen plötzlich eine extrem verlässliche, statistische Regelmäßigkeit.
                 </div>
             </div>
             
@@ -144,6 +114,7 @@
             </div>
         </div>
 
+        <!-- ================= S L I D E  3: Halbwertszeit ================= -->
         <div id="slide-3" class="slide grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-y-auto" style="max-height: 70vh;">
                 <h2 class="text-3xl font-bold text-green-600 mb-6">3. Die Halbwertszeit</h2>
@@ -171,46 +142,39 @@
             </div>
             
             <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
-                <h3 class="font-bold text-lg mb-2 text-slate-700">Der "Popcorn-Zerfall"</h3>
-                <p class="text-sm text-slate-500 mb-6 text-center">Klicke, um exakt eine Halbwertszeit vergehen zu lassen. Beobachte, wie sich die Anzahl der roten (instabilen) Kerne verhält.</p>
+                <h3 class="font-bold text-lg mb-2 text-slate-700">Der "Massen-Zerfall"</h3>
+                <p class="text-sm text-slate-500 mb-4 text-center">Hier siehst du 1000 instabile Atome. Klicke, um exakt eine Halbwertszeit vergehen zu lassen. Beobachte, wie sich die Anzahl verhält.</p>
                 
-                <div id="popcorn-grid" class="mb-6 p-4 bg-slate-900 rounded-xl">
-                    </div>
+                <canvas id="canvas-3" width="500" height="300" class="mb-4"></canvas>
                 
-                <div class="w-full max-w-sm bg-slate-200 rounded-full h-6 mb-2 overflow-hidden border border-slate-300">
-                    <div id="progress-bar" class="bg-red-500 h-6 transition-all duration-500 ease-in-out" style="width: 100%"></div>
-                </div>
                 <div class="w-full max-w-sm flex justify-between text-sm font-bold text-slate-600 mb-6">
-                    <span>Instabil (Rot): <span id="count-unstable" class="text-red-600">100</span></span>
+                    <span>Instabil (Rot): <span id="count-unstable" class="text-red-600">1000</span></span>
                     <span>Zerfallen (Grün): <span id="count-stable" class="text-green-600">0</span></span>
                 </div>
 
-                <button onclick="triggerHalfLife()" id="btn-halflife" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow transition-transform active:scale-95 mb-2">⏱ 1 Halbwertszeit vergehen lassen</button>
-                <button onclick="resetAtoms()" class="text-sm text-slate-500 hover:text-slate-800 underline">Experiment zurücksetzen</button>
+                <button onclick="triggerHalfLifeCanvas()" id="btn-halflife" class="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl shadow transition-transform active:scale-95 mb-2">⏱ 1 Halbwertszeit vergehen lassen</button>
+                <button onclick="resetAtomsCanvas()" class="text-sm text-slate-500 hover:text-slate-800 underline">Experiment zurücksetzen</button>
             </div>
         </div>
 
+        <!-- ================= S L I D E  4: Die Kurve ================= -->
         <div id="slide-4" class="slide grid-cols-1 md:grid-cols-2 gap-8">
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 overflow-y-auto" style="max-height: 70vh;">
-                <h2 class="text-3xl font-bold text-slate-800 mb-6">4. Die Zerfallskurve</h2>
+                <h2 class="text-3xl font-bold text-slate-800 mb-6">4. Die Halbierungs-Kurve</h2>
                 
                 <p class="mb-4 text-slate-700">
-                    Wenn man die Werte für eine größere Menge Atome (z.B. 1000 -> 500 -> 250 -> 125) in ein Diagramm einträgt, erhält man eine ganz typische Kurve: Die <strong>exponentielle Zerfallskurve</strong>.
+                    Wenn man die Werte für eine größere Menge Atome (z.B. 1000 -> 500 -> 250 -> 125) aus unserem Experiment der vorherigen Seite in ein Diagramm einträgt, erhält man eine ganz typische Kurve: Die <strong>exponentielle Zerfallskurve</strong>.
                 </p>
 
                 <h3 class="text-xl font-bold text-green-700 mt-6 mb-2">Sie wird immer flacher</h3>
                 <p class="mb-4 text-slate-700">
-                    Am Anfang, wenn noch sehr viele instabile Kerne da sind, zerfallen extrem viele Kerne gleichzeitig. Die Kurve fällt steil ab. Je weniger Kerne übrig sind, desto weniger können auch zerfallen. Die Kurve flacht ab.
+                    Am Anfang, wenn noch sehr viele instabile Kerne da sind, zerfallen extrem viele Kerne gleichzeitig (von 1000 auf 500 ist ein großer Sprung). Die Kurve fällt am Anfang sehr steil ab. Je weniger Kerne übrig sind, desto weniger können auch zerfallen (von 125 auf 62,5 ist ein viel kleinerer Schritt). Dadurch wird die Kurve nach hinten hinaus immer flacher.
                 </p>
-
-                <div class="bg-red-50 p-4 border-l-4 border-red-500 mb-4 rounded text-sm text-red-900">
-                    <strong>Das Paradoxon:</strong> Rein mathematisch gesehen, teilt man eine Zahl immer wieder durch 2. Eine Zahl, die man durch 2 teilt, wird zwar winzig klein, aber sie wird theoretisch <strong>niemals genau Null!</strong>
-                </div>
             </div>
             
             <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Diagramm aufbauen</h3>
-                <p class="text-sm text-slate-500 mb-4 text-center">Klicke mehrfach, um die Kurve Schritt für Schritt einzuzeichnen.</p>
+                <p class="text-sm text-slate-500 mb-4 text-center">Klicke mehrfach, um die Kurve für 1000 Atome Schritt für Schritt einzuzeichnen.</p>
                 
                 <canvas id="canvas-4" width="500" height="400" class="bg-slate-100 rounded shadow-inner mb-4 border border-slate-300" style="box-shadow: none;"></canvas>
                 
@@ -218,64 +182,48 @@
             </div>
         </div>
 
+        <!-- ================= S L I D E  5: Quiz & Pufferaufgabe ================= -->
         <div id="slide-5" class="slide grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-bold text-slate-800 mb-6">5. Wissenstest</h2>
-                
-                <div class="space-y-4">
-                    <div class="bg-slate-50 p-4 rounded-lg border">
-                        <p class="font-bold text-sm text-slate-700 mb-2">Frage 1: Ein Stoff hat eine Halbwertszeit von 5 Tagen. Du hast heute 800 Gramm. Wie viel ist nach 15 Tagen noch übrig?</p>
-                        <select id="q1" class="w-full p-2 border rounded focus:ring-2 ring-green-400 text-sm">
-                            <option value="">Bitte wählen...</option>
-                            <option value="f1">0 Gramm</option>
-                            <option value="f2">200 Gramm</option>
-                            <option value="r">100 Gramm</option>
-                        </select>
-                    </div>
-
-                    <div class="bg-slate-50 p-4 rounded-lg border">
-                        <p class="font-bold text-sm text-slate-700 mb-2">Frage 2: Was beschreibt die Halbwertszeit?</p>
-                        <select id="q2" class="w-full p-2 border rounded focus:ring-2 ring-green-400 text-sm">
-                            <option value="">Bitte wählen...</option>
-                            <option value="r">Die Zeit, in der sich die Menge der instabilen Kerne halbiert.</option>
-                            <option value="f1">Die Zeit, bis die Strahlung komplett weg ist.</option>
-                            <option value="f2">Die Zeit, bis das halbe Atom zerbrochen ist.</option>
-                        </select>
-                    </div>
-                    
-                    <button onclick="checkQuiz()" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-3 rounded-lg transition">Test Auswerten</button>
-                    <div id="quiz-feedback" class="hidden p-4 rounded-lg font-bold text-sm"></div>
+            <!-- Linke Seite: Link zum Quiz -->
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center text-center">
+                <div class="mb-6">
+                    <span class="text-6xl">📝</span>
                 </div>
+                <h2 class="text-3xl font-bold text-slate-800 mb-4">5. Wissenstest</h2>
+                <p class="text-slate-600 mb-8 text-lg">
+                    Um dein Wissen zu überprüfen, bearbeite nun den digitalen Wissenstest. Klicke auf den untenstehenden Button, um zum Quiz zu gelangen.
+                </p>
+                <a href="https://nx72396.your-storageshare.de/apps/formvox/public/6068/Ig2DOY0y0uSxYGHtXLPzEqoNxuS7sx7Z" target="_blank" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 rounded-xl shadow-lg transition-transform active:scale-95 text-lg">
+                    Hier geht es zum digitalen Wissenstest!
+                </a>
             </div>
-            <!-- Rechte Seite: Pufferaufgabe für Schnelle -->
+
+            <!-- Rechte Seite: Pufferaufgabe für Schnelle (Das Kuchenrätsel) -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
                 <h2 class="text-xl font-bold text-purple-600 mb-2 flex items-center">
                     <span class="mr-2">🚀</span> Zusatzaufgabe für Schnelle
                 </h2>
-                <h3 class="font-bold text-slate-800 mb-4">Wann ist die Strahlung weg?</h3>
+                <h3 class="font-bold text-slate-800 mb-4">Das Kuchen-Rätsel</h3>
                 
                 <div class="text-slate-700 space-y-4 mb-6 flex-grow">
                     <div class="bg-blue-50 p-4 border-l-4 border-blue-500 rounded text-sm text-blue-900 mb-4">
-                        <strong>Der Parabel-Vergleich:</strong> Die Kurve von Folie 4 erinnert optisch stark an eine <strong>halbe Parabel</strong> aus dem Matheunterricht. Es gibt aber einen entscheidenden Unterschied: Eine normale halbe Parabel stürzt irgendwann hart auf die Null-Linie. Die Zerfallskurve hingegen schmiegt sich immer flacher an, erreicht die Null mathematisch gesehen aber <strong>niemals</strong> (denn eine Zahl, die man immer wieder halbiert, wird nie exakt Null).
+                        Stell dir vor, du hast einen leckeren Kuchen. Am ersten Tag isst du genau die Hälfte davon. Am zweiten Tag isst du wieder genau die Hälfte vom Rest. Am dritten Tag wieder die Hälfte vom Rest... und so weiter. (Immer geteilt durch 2).
                     </div>
                     <p class="text-sm font-bold text-slate-800">
                         Aufgabe: Diskutiere mit deinem Partner/deiner Partnerin!
                     </p>
                     <ul class="list-disc pl-5 text-sm space-y-2">
-                        <li>Bedeutet das, dass ein radioaktives Stück Uran für alle Ewigkeit (bis in die Unendlichkeit) strahlen wird?</li>
-                        <li>Oder hört die Strahlung in der Realität irgendwann *wirklich* auf?</li>
+                        <li>Wird dieser Kuchen <strong>mathematisch gesehen</strong> jemals exakt Null? (Tipp: Denk an die Halbierungskurve von vorhin!)</li>
+                        <li>Bedeutet das also, dass ein radioaktives Stück Uran für alle Ewigkeit weiterstrahlt? Oder hört die Strahlung in der <strong>Realität</strong> irgendwann *wirklich* auf?</li>
                     </ul>
-                    <p class="text-sm italic text-slate-500 mt-2">
-                        Tipp: Denkt daran, woraus so ein Stück Uran eigentlich besteht. Kann man ein Atom in der Mitte durchschneiden?
-                    </p>
                 </div>
 
                 <div class="mt-auto">
                     <button onclick="toggleSolution()" id="btn-solution" class="w-full py-2 bg-slate-200 hover:bg-slate-300 text-slate-800 font-bold rounded transition-colors text-sm">
-                        Antwort anzeigen
+                        Lösung anzeigen
                     </button>
                     <div id="solution-box" class="hidden mt-3 p-4 bg-green-50 border border-green-200 rounded-lg text-sm text-green-900">
-                        <strong>Die Antwort:</strong> In der Realität hört die Strahlung irgendwann <strong>komplett auf</strong>! Die Mathematik (das ständige Teilen durch 2) ist nur ein statistisches Modell. In der Natur gibt es kein "halbes" Atom. Irgendwann (nach sehr, sehr langer Zeit) zerfällt ganz real der absolut letzte instabile Atomkern in dem Material. Ab diesem Zeitpunkt ist das Material endgültig stabil und strahlt nicht mehr.
+                        <strong>Die Lösung:</strong> Mathematisch teilt man immer weiter durch 2, die Zahl wird also winzig klein, aber sie wird <em>niemals exakt Null</em>. In der Realität gibt es aber irgendwann nur noch ein einziges, letztes "Kuchenkrümelchen" (oder beim Uran: ein allerletztes Atom). Ein einzelnes Atom kann man nicht mehr in der Mitte durchschneiden. Wenn dieses letzte Atom zerfällt, ist der radioaktive Stoff endgültig weg – und die radioaktive Strahlung stoppt komplett!
                     </div>
                 </div>
             </div>
@@ -283,6 +231,7 @@
 
     </main>
 
+    <!-- Footer Navigation -->
     <footer class="bg-white border-t border-slate-200 p-4 sticky bottom-0 z-20 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
         <div class="max-w-6xl mx-auto flex justify-between items-center">
             <button id="btn-prev" onclick="changeSlide(-1)" class="nav-btn bg-slate-200 text-slate-800 px-6 py-3 rounded-lg font-bold" disabled>Zurück</button>
@@ -312,9 +261,9 @@
             const solBox = document.getElementById('solution-box');
             const btn = document.getElementById('btn-solution');
             if(solBox.classList.contains('hidden')) {
-                solBox.classList.remove('hidden'); btn.innerText = 'Antwort ausblenden';
+                solBox.classList.remove('hidden'); btn.innerText = 'Lösung ausblenden';
             } else {
-                solBox.classList.add('hidden'); btn.innerText = 'Antwort anzeigen';
+                solBox.classList.add('hidden'); btn.innerText = 'Lösung anzeigen';
             }
         }
 
@@ -379,7 +328,6 @@
             s1State.active = true;
             s1State.decayed = false;
             s1State.startTime = Date.now();
-            // Zufälliger Zerfall zwischen 2 und 8 Sekunden
             s1State.decayTime = 2000 + Math.random() * 6000; 
         }
 
@@ -404,11 +352,10 @@
             drawNucleus(ctx1, 250, 150, 2.5, wobble, singleAtomCluster, s1State.decayed);
             
             if(s1State.decayed) {
-                // Zeige abfliegendes Teilchen
                 let pX = 250 + ((Date.now() - (s1State.startTime + s1State.decayTime)) / 5);
                 if (pX < 550) {
                     ctx1.beginPath(); ctx1.arc(pX, 120, 5, 0, Math.PI*2);
-                    ctx1.fillStyle = '#3b82f6'; ctx1.fill(); // Beta elektron
+                    ctx1.fillStyle = '#3b82f6'; ctx1.fill(); 
                 }
             }
         }
@@ -430,7 +377,6 @@
             let left = 0;
             diceList.forEach(d => {
                 if(!d.decayed) {
-                    // 1/6 Chance
                     if(Math.random() < (1/6)) d.decayed = true;
                     else left++;
                 }
@@ -455,50 +401,126 @@
         }
 
         // ==========================================
-        // SLIDE 3: Popcorn Zerfall (Grid)
+        // SLIDE 3: 1000 Atome in Canvas (Ehemals Popcorn)
         // ==========================================
-        const totalAtoms = 1000;
-        let unstableAtoms = totalAtoms;
-        const grid = document.getElementById('popcorn-grid');
-        
-        function initAtoms() {
-            grid.innerHTML = '';
-            for(let i=0; i<totalAtoms; i++) {
-                const atom = document.createElement('div');
-                atom.className = 'atom-dot';
-                atom.id = `atom-${i}`;
-                grid.appendChild(atom);
+        const ctx3 = document.getElementById('canvas-3').getContext('2d');
+        const c3Total = 1000;
+        let c3Unstable = c3Total;
+        let massAtoms = [];
+        let isDecaying = false;
+
+        // Atome generieren und im Canvas verteilen (als kleiner Schwarm)
+        function initMassAtoms() {
+            massAtoms = [];
+            for(let i=0; i<c3Total; i++) {
+                massAtoms.push({
+                    x: 50 + Math.random() * 400,
+                    y: 30 + Math.random() * 220,
+                    stable: false,
+                    animState: 0 // Für den "Pop"-Effekt
+                });
             }
-            updateStats();
+            c3Unstable = c3Total;
+            updateMassStats();
         }
 
-        function triggerHalfLife() {
-            if (unstableAtoms <= 0) return;
+        function updateMassStats() {
+            document.getElementById('count-unstable').innerText = c3Unstable;
+            document.getElementById('count-stable').innerText = c3Total - c3Unstable;
             
-            let currentUnstableElements = Array.from(document.querySelectorAll('.atom-dot:not(.stable)'));
-            let half = Math.ceil(currentUnstableElements.length / 2);
-            if (currentUnstableElements.length === 1) half = 1; 
+            if(c3Unstable <= 1) {
+                document.getElementById('btn-halflife').disabled = true;
+                document.getElementById('btn-halflife').classList.add('opacity-50');
+            }
+        }
+
+        function triggerHalfLifeCanvas() {
+            if (c3Unstable <= 0 || isDecaying) return;
+            isDecaying = true;
+            document.getElementById('btn-halflife').disabled = true;
+
+            // Finde alle instabilen
+            let unstableIndices = [];
+            massAtoms.forEach((a, index) => {
+                if(!a.stable) unstableIndices.push(index);
+            });
             
-            currentUnstableElements.sort(() => 0.5 - Math.random());
+            let half = Math.ceil(unstableIndices.length / 2);
+            if (unstableIndices.length === 1) half = 1; 
+
+            // Mischen
+            unstableIndices.sort(() => 0.5 - Math.random());
             
+            // Zerfall animieren (versetzt)
             for(let i = 0; i < half; i++) {
                 setTimeout(() => {
-                    currentUnstableElements[i].classList.add('stable', 'particle-pop');
-                    unstableAtoms--;
-                    updateStats();
-                }, i * 2); // Sehr kurzer Delay bei 1000 Atomen (schnelles "Popcorn")
+                    let idx = unstableIndices[i];
+                    massAtoms[idx].stable = true;
+                    massAtoms[idx].animState = 10; // Trigger Pop Animation
+                    c3Unstable--;
+                    updateMassStats();
+                }, i * 2); // 2ms Delay = 1 Sekunde für 500 Atome
             }
+
+            // Button wieder freigeben nach der Animation
+            setTimeout(() => {
+                isDecaying = false;
+                if(c3Unstable > 1) document.getElementById('btn-halflife').disabled = false;
+            }, half * 2 + 200);
         }
 
-        function resetAtoms() {
-            unstableAtoms = totalAtoms;
-            initAtoms();
+        function resetAtomsCanvas() {
+            initMassAtoms();
+            document.getElementById('btn-halflife').disabled = false;
+            document.getElementById('btn-halflife').classList.remove('opacity-50');
         }
 
-        function updateStats() {
-            document.getElementById('count-unstable').innerText = unstableAtoms;
-            document.getElementById('count-stable').innerText = totalAtoms - unstableAtoms;
-            document.getElementById('progress-bar').style.width = `${(unstableAtoms / totalAtoms) * 100}%`;
+        function renderSlide3() {
+            ctx3.clearRect(0, 0, 500, 300);
+            
+            // Atome zeichnen
+            massAtoms.forEach(a => {
+                ctx3.beginPath();
+                
+                let radius = 2.5;
+                if (a.animState > 0) {
+                    radius = 2.5 + (a.animState * 0.5); // "Pop" Effekt
+                    a.animState--;
+                }
+                
+                ctx3.arc(a.x, a.y, radius, 0, Math.PI*2);
+                
+                if(a.stable) {
+                    ctx3.fillStyle = STABLE_COLOR;
+                    if(a.animState > 0) {
+                        ctx3.shadowColor = STABLE_COLOR;
+                        ctx3.shadowBlur = 10;
+                    } else {
+                        ctx3.shadowBlur = 0;
+                        ctx3.globalAlpha = 0.5; // Stabile treten in den Hintergrund
+                    }
+                } else {
+                    ctx3.fillStyle = PROTON_COLOR;
+                    ctx3.shadowBlur = 0;
+                    ctx3.globalAlpha = 1.0;
+                }
+                
+                ctx3.fill();
+                ctx3.globalAlpha = 1.0; // Reset Alpha für das nächste Atom
+            });
+
+            // Fortschrittsbalken oben drüber zeichnen
+            const barWidth = 400;
+            const barHeight = 10;
+            const barX = 50;
+            const barY = 280;
+
+            ctx3.fillStyle = '#334155'; // Hintergrundbalken
+            ctx3.fillRect(barX, barY, barWidth, barHeight);
+            
+            ctx3.fillStyle = PROTON_COLOR; // Roter Balken
+            let currentWidth = (c3Unstable / c3Total) * barWidth;
+            ctx3.fillRect(barX, barY, currentWidth, barHeight);
         }
 
         // ==========================================
@@ -566,40 +588,15 @@
         function mainLoop() {
             if (currentSlide === 1) renderSlide1();
             if (currentSlide === 2) renderSlide2();
+            if (currentSlide === 3) renderSlide3();
             if (currentSlide === 4) renderSlide4();
             requestAnimationFrame(mainLoop);
         }
         
         // Init
         window.onload = () => {
-            initAtoms();
+            initMassAtoms();
             mainLoop();
-        }
-
-        // --- Quiz Auswertung ---
-        function checkQuiz() {
-            const q1 = document.getElementById('q1').value;
-            const q2 = document.getElementById('q2').value;
-            const fb = document.getElementById('quiz-feedback');
-            
-            fb.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
-            if(q1 === "" || q2 === "") {
-                fb.classList.add('bg-red-100', 'text-red-800');
-                fb.innerText = "Bitte beantworte erst beide Fragen!";
-                return;
-            }
-
-            let correct = 0;
-            if(q1 === "r") correct++;
-            if(q2 === "r") correct++;
-
-            if(correct === 2) {
-                fb.classList.add('bg-green-100', 'text-green-800');
-                fb.innerText = "🎉 Perfekt! Du hast verstanden, wie man mit der Halbwertszeit rechnet (800 -> 400 -> 200 -> 100).";
-            } else {
-                fb.classList.add('bg-red-100', 'text-red-800');
-                fb.innerText = `Du hast ${correct} von 2 Fragen richtig. Tipp zu Frage 1: 15 Tage sind DREI Halbwertszeiten. Du musst die 800 also dreimal hintereinander halbieren!`;
-            }
         }
     </script>
 </body>
