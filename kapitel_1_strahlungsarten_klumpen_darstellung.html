@@ -48,7 +48,7 @@
                 Die Strahlungsarten
             </h1>
             <div class="text-sm text-slate-300 font-medium bg-slate-800 px-3 py-1 rounded-full whitespace-nowrap">
-                Seite <span id="page-indicator">1</span> / 6
+                Seite <span id="page-indicator">1</span> / 8
             </div>
         </div>
     </header>
@@ -125,88 +125,209 @@
             </div>
         </div>
 
-        <!-- ================= S L I D E  3: Alphastrahlung ================= -->
-        <div id="slide-3" class="slide grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-bold text-red-600 mb-2 flex items-center">
+        <!-- ================= S L I D E  3: Arbeitsaufteilung (Hub) ================= -->
+        <div id="slide-3" class="slide grid-cols-1 gap-8">
+            <div class="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-slate-200 flex flex-col items-center">
+                <h2 class="text-3xl font-bold text-slate-800 mb-4 flex items-center">
+                    <span class="text-4xl mr-3">🤝</span> 3. Arbeitsaufteilung im Team
+                </h2>
+                <p class="text-lg text-slate-700 mb-6 font-medium text-center max-w-4xl">
+                    Jeder instabile Kern spuckt unterschiedliche Dinge aus. Teilt nun die drei verschiedenen Strahlungsarten zwischen den Mitgliedern in eurer <strong>Tischreihe</strong> auf.
+                </p>
+                
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-6 w-full max-w-3xl mb-8 rounded shadow-sm text-blue-900">
+                    <h3 class="font-bold text-lg mb-2">Euer Auftrag:</h3>
+                    <ul class="list-disc pl-5 space-y-2">
+                        <li>Jeder aus der Tischreihe wählt <strong>genau eine</strong> Strahlungsart aus (Alpha, Beta oder Gamma).</li>
+                        <li>Lest euch auf der folgenden Seite die Eigenschaften eurer Strahlung genau durch.</li>
+                        <li>Klickt danach unten auf <strong>"Weiter"</strong>, um zur gemeinsamen Gruppenbesprechung zu gelangen!</li>
+                    </ul>
+                </div>
+
+                <h3 class="text-xl font-bold text-slate-800 mb-4">Wähle dein Spezialgebiet aus:</h3>
+                <div class="flex flex-col md:flex-row gap-4 w-full max-w-3xl justify-center">
+                    <button onclick="jumpToSlide(4)" class="flex-1 bg-red-600 hover:bg-red-700 text-white font-bold py-4 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 active:scale-95 flex items-center justify-center text-lg">
+                        <span class="text-2xl mr-2">α</span> Alpha-Strahlung
+                    </button>
+                    <button onclick="jumpToSlide(5)" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 active:scale-95 flex items-center justify-center text-lg">
+                        <span class="text-2xl mr-2">β</span> Beta-Strahlung
+                    </button>
+                    <button onclick="jumpToSlide(6)" class="flex-1 bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-4 px-6 rounded-xl shadow-md transition-transform hover:-translate-y-1 active:scale-95 flex items-center justify-center text-lg">
+                        <span class="text-2xl mr-2">γ</span> Gamma-Strahlung
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= S L I D E  4: Alphastrahlung ================= -->
+        <div id="slide-4" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative flex flex-col">
+                <button onclick="jumpToSlide(3)" class="absolute top-4 right-4 text-xs font-bold bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1 rounded">← Zurück zur Auswahl</button>
+                <h2 class="text-3xl font-bold text-red-600 mb-4 flex items-center">
                     <span class="text-4xl mr-3">α</span> Alphastrahlung
                 </h2>
-                <h3 class="text-lg text-slate-500 font-medium mb-6">Metapher: Die "Bowlingkugel"</h3>
                 
-                <p class="mb-4 text-slate-700">
-                    Ein Alphazerfall passiert meist bei extrem großen Atomkernen. Der Kern schnürt ein großes "Paket" ab und stößt es wuchtig nach draußen, um stabiler zu werden.
-                </p>
-                <ul class="list-disc pl-5 mb-6 space-y-4 text-slate-700">
-                    <li><strong>Was ist das?</strong> Das ausgespuckte Paket ist ein Helium-Kern. Er besteht genau aus <strong>2 Protonen und 2 Neutronen</strong>.</li>
-                    <li><strong>Eigenschaften:</strong> Das Alphateilchen ist sehr schwer und wuchtig. Deshalb fliegt es aber auch eher langsam.</li>
-                    <li><strong>Abschirmung:</strong> Stell dir eine fliegende Bowlingkugel vor. Sie knallt sofort gegen Luftteilchen und verliert ihre Wucht. <strong>Schon ein normales Blatt Papier reicht aus, um sie zu stoppen.</strong></li>
+                <ul class="list-disc pl-5 mb-6 space-y-4 text-slate-700 flex-grow">
+                    <li>
+                        <strong>Entsteht aus und besteht aus...</strong><br>
+                        Ein Alphazerfall passiert meist bei extrem großen Atomkernen. Der Kern schnürt ein großes "Paket" ab und stößt es wuchtig nach draußen. Dieses ausgespuckte Paket ist ein <strong>Helium-Kern</strong>. Es besteht aus genau <strong>2 Protonen und 2 Neutronen</strong>.
+                    </li>
+                    <li>
+                        <strong>Eigenschaften:</strong><br>
+                        Das Alphateilchen ist sehr <strong>schwer und wuchtig</strong> (wie eine fliegende Bowlingkugel). Aufgrund seiner Masse fliegt es vergleichsweise <strong>langsam</strong>.
+                    </li>
+                    <li>
+                        <strong>Abschirmung:</strong><br>
+                        Wegen seiner Wucht knallt es sofort gegen Luftteilchen und verliert schnell seine Energie. Schon ein <strong>normales Blatt Papier</strong> oder wenige Zentimeter Luft reichen aus, um die Strahlung zu stoppen.
+                    </li>
                 </ul>
+                <div class="bg-red-50 p-4 rounded text-sm text-red-900 border border-red-200 mt-4">
+                    <strong>Arbeitsauftrag:</strong> Trage die Informationen zu deiner Strahlung in die Tabelle auf deinem Arbeitsblatt ein. Klicke danach auf "Weiter", um in die Besprechung mit deiner Tischreihe zu starten!
+                </div>
             </div>
             <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Demonstration: Alphazerfall</h3>
                 <p class="text-sm text-slate-500 mb-4 text-center">Ein Teilchen-Klumpen verlässt den Kern und prallt ans Papier.</p>
-                <canvas id="canvas-3" width="500" height="300"></canvas>
-                <button onclick="triggerDecay(3)" class="mt-4 w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">α-Zerfall auslösen</button>
+                <canvas id="canvas-4" width="500" height="300"></canvas>
+                <button onclick="triggerDecay(4)" class="mt-4 w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">α-Zerfall auslösen</button>
             </div>
         </div>
 
-        <!-- ================= S L I D E  4: Betastrahlung ================= -->
-        <div id="slide-4" class="slide grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-bold text-blue-600 mb-2 flex items-center">
+        <!-- ================= S L I D E  5: Betastrahlung ================= -->
+        <div id="slide-5" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative flex flex-col">
+                <button onclick="jumpToSlide(3)" class="absolute top-4 right-4 text-xs font-bold bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1 rounded">← Zurück zur Auswahl</button>
+                <h2 class="text-3xl font-bold text-blue-600 mb-4 flex items-center">
                     <span class="text-4xl mr-3">β</span> Betastrahlung
                 </h2>
-                <h3 class="text-lg text-slate-500 font-medium mb-6">Metapher: Die "Stecknadel"</h3>
                 
-                <p class="mb-4 text-slate-700">
-                    Betastrahlung entsteht, wenn der Kern ein <strong>Ungleichgewicht</strong> hat (z.B. zu viele Neutronen). Um das zu reparieren, passiert ein verrückter Trick:
-                </p>
-                <ul class="list-disc pl-5 mb-6 space-y-4 text-slate-700">
-                    <li><strong>Die Wandlung:</strong> Ein neutrales <strong>Neutron im Kern wandelt sich um!</strong> Es wird zu einem Proton und erzeugt dabei ein winziges Elektron, das aus dem Kern geschossen wird.</li>
-                    <li><strong>Eigenschaften:</strong> Betastrahlung besteht also aus einem winzigen Elektron. Es ist extrem leicht und fliegt wahnsinnig schnell.</li>
-                    <li><strong>Abschirmung:</strong> Wie eine fliegende, schnelle Stecknadel schießt es problemlos durch ein Blatt Papier hindurch. Man braucht <strong>einige Millimeter Aluminiumblech</strong>, um es zu stoppen.</li>
+                <ul class="list-disc pl-5 mb-6 space-y-4 text-slate-700 flex-grow">
+                    <li>
+                        <strong>Entsteht aus und besteht aus...</strong><br>
+                        Betastrahlung entsteht bei einem Ungleichgewicht im Kern (z.B. zu viele Neutronen). Ein neutrales <strong>Neutron im Kern wandelt sich in ein Proton um!</strong> Dabei wird ein winziges <strong>Elektron</strong> erzeugt und aus dem Kern geschossen. Die Strahlung besteht also aus <strong>Elektronen</strong>.
+                    </li>
+                    <li>
+                        <strong>Eigenschaften:</strong><br>
+                        Das Elektron ist <strong>extrem leicht</strong> (wie eine winzige Stecknadel). Dadurch fliegt es <strong>wahnsinnig schnell</strong>, fast mit Lichtgeschwindigkeit.
+                    </li>
+                    <li>
+                        <strong>Abschirmung:</strong><br>
+                        Wie eine fliegende, schnelle Stecknadel schießt es problemlos durch ein Blatt Papier hindurch. Man braucht <strong>einige Millimeter Aluminiumblech</strong> (oder Plexiglas), um die Strahlung zu stoppen.
+                    </li>
                 </ul>
+                <div class="bg-blue-50 p-4 rounded text-sm text-blue-900 border border-blue-200 mt-4">
+                    <strong>Arbeitsauftrag:</strong> Trage die Informationen zu deiner Strahlung in die Tabelle auf deinem Arbeitsblatt ein. Klicke danach auf "Weiter", um in die Besprechung mit deiner Tischreihe zu starten!
+                </div>
             </div>
             <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Demonstration: Betazerfall</h3>
                 <p class="text-sm text-slate-500 mb-4 text-center">Achte auf den Kern: Ein graues Neutron wird zu einem roten Proton und spuckt das blaue Elektron aus!</p>
-                <canvas id="canvas-4" width="500" height="300"></canvas>
-                <button onclick="triggerDecay(4)" class="mt-4 w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">β-Zerfall auslösen</button>
+                <canvas id="canvas-5" width="500" height="300"></canvas>
+                <button onclick="triggerDecay(5)" class="mt-4 w-full md:w-auto bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">β-Zerfall auslösen</button>
             </div>
         </div>
 
-        <!-- ================= S L I D E  5: Gammastrahlung ================= -->
-        <div id="slide-5" class="slide grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-bold text-yellow-500 mb-2 flex items-center">
+        <!-- ================= S L I D E  6: Gammastrahlung ================= -->
+        <div id="slide-6" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 relative flex flex-col">
+                <button onclick="jumpToSlide(3)" class="absolute top-4 right-4 text-xs font-bold bg-slate-200 hover:bg-slate-300 text-slate-700 px-3 py-1 rounded">← Zurück zur Auswahl</button>
+                <h2 class="text-3xl font-bold text-yellow-500 mb-4 flex items-center">
                     <span class="text-4xl mr-3">γ</span> Gammastrahlung
                 </h2>
-                <h3 class="text-lg text-slate-500 font-medium mb-6">Metapher: Der "Lichtblitz"</h3>
                 
-                <p class="mb-4 text-slate-700">
-                    Wichtig: Gammastrahlung ist meistens ein <strong>Nebenprodukt</strong>. Sie tritt fast immer erst *nach* einem Alpha- oder Betazerfall auf.
-                </p>
-                <ul class="list-disc pl-5 mb-6 space-y-4 text-slate-700">
-                    <li><strong>Die Entstehung:</strong> Nachdem der Kern ein Teilchen ausgespuckt hat, "wackelt" er oft noch. Um sich zu beruhigen, strahlt er die restliche Energie als unsichtbare Welle ab.</li>
-                    <li><strong>Eigenschaften:</strong> Gammastrahlung ist kein Teilchen. Sie hat <strong>keine Masse</strong>, sondern besteht aus reiner Energie.</li>
-                    <li><strong>Abschirmung:</strong> Reine Energie aufzuhalten, ist schwer. Sie durchschlägt Papier und Alu blitzartig. Erst sehr dicke Materialien wie <strong>Blei oder meterdicker Beton</strong> können sie merklich abschwächen.</li>
+                <ul class="list-disc pl-5 mb-6 space-y-4 text-slate-700 flex-grow">
+                    <li>
+                        <strong>Entsteht aus und besteht aus...</strong><br>
+                        Gammastrahlung ist meist ein <strong>Nebenprodukt</strong>. Nachdem ein Kern ein Alpha- oder Betateilchen ausgespuckt hat, "wackelt" er oft noch. Um sich ganz zu beruhigen, strahlt er die restliche überschüssige Energie ab. Die Strahlung besteht aus einer <strong>elektromagnetischen Welle</strong> (reine Energie).
+                    </li>
+                    <li>
+                        <strong>Eigenschaften:</strong><br>
+                        Gammastrahlung ist <strong>kein Teilchen</strong>. Sie hat <strong>keine Masse</strong> (wie ein unsichtbarer Lichtblitz) und breitet sich mit Lichtgeschwindigkeit aus.
+                    </li>
+                    <li>
+                        <strong>Abschirmung:</strong><br>
+                        Reine Energie aufzuhalten, ist sehr schwer. Sie durchschlägt Papier und Aluminium blitzartig. Erst sehr dicke und dichte Materialien wie <strong>Blei oder meterdicker Beton</strong> können sie merklich abschwächen.
+                    </li>
                 </ul>
+                <div class="bg-yellow-50 p-4 rounded text-sm text-yellow-900 border border-yellow-200 mt-4">
+                    <strong>Arbeitsauftrag:</strong> Trage die Informationen zu deiner Strahlung in die Tabelle auf deinem Arbeitsblatt ein. Klicke danach auf "Weiter", um in die Besprechung mit deiner Tischreihe zu starten!
+                </div>
             </div>
             <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col justify-center items-center">
                 <h3 class="font-bold text-lg mb-2 text-slate-700">Demonstration: Gamma als Begleiter</h3>
                 <p class="text-sm text-slate-500 mb-4 text-center">Der Kern macht erst einen Alpha-Zerfall. Danach entlädt er ein Gamma-Wellenpaket. Blei schwächt die Welle ab!</p>
-                <canvas id="canvas-5" width="500" height="300"></canvas>
-                <button onclick="triggerDecay(5)" class="mt-4 w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">Zerfallsreihe auslösen</button>
+                <canvas id="canvas-6" width="500" height="300"></canvas>
+                <button onclick="triggerDecay(6)" class="mt-4 w-full md:w-auto bg-yellow-500 hover:bg-yellow-600 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition-transform active:scale-95">Zerfallsreihe auslösen</button>
             </div>
         </div>
 
-        <!-- ================= S L I D E  6: Quiz & Pufferaufgabe ================= -->
-        <div id="slide-6" class="slide grid-cols-1 md:grid-cols-2 gap-8">
+        <!-- ================= S L I D E  7: Gruppenbesprechung ================= -->
+        <div id="slide-7" class="slide grid-cols-1 gap-8">
+            <div class="bg-white p-6 md:p-10 rounded-xl shadow-sm border border-slate-200">
+                <h2 class="text-3xl font-bold text-slate-800 mb-6 flex items-center">
+                    <span class="text-4xl mr-3">🗣️</span> 7. Gruppenbesprechung
+                </h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Linke Spalte: Aufgaben -->
+                    <div>
+                        <div class="mb-8">
+                            <h3 class="font-bold text-xl text-blue-700 mb-2">Auftrag 1: Wissen bündeln</h3>
+                            <p class="text-slate-700 mb-4">Tauscht euch jetzt in eurer Tischreihe über eure Experten-Themen aus und vervollständigt gemeinsam die <strong>Tabelle auf eurem Arbeitsblatt</strong>.</p>
+                            
+                            <div class="bg-slate-50 p-4 rounded-lg border border-slate-200 text-sm">
+                                <p class="font-bold text-slate-600 mb-2">Eure Tabelle sollte so aufgebaut sein:</p>
+                                <div class="grid grid-cols-5 gap-2 text-xs font-semibold bg-slate-200 p-2 rounded text-center">
+                                    <div>Strahlung</div>
+                                    <div>Entsteht aus und besteht aus...</div>
+                                    <div>Eigenschaften</div>
+                                    <div>Abschirmung</div>
+                                    <div>Skizze</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-xl text-purple-700 mb-2">Auftrag 2: Das Becquerel-Rätsel</h3>
+                            <p class="text-slate-700 mb-4">Erinnert euch an Seite 1: Henri Becquerel legte das Uransalz auf einen <strong>lichtdicht verpackten</strong> Fotofilm, und trotzdem entstand ein Bild.</p>
+                            <div class="bg-purple-50 p-4 border-l-4 border-purple-500 rounded text-purple-900">
+                                <strong>Diskutiert:</strong> Welche der drei Strahlungsarten hat vermutlich das Bild ausgelöst? Begründet eure entscheidung. Notiert eure Vermutung auf dem Arbeitsblatt!
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Rechte Spalte: Rückblick-Buttons -->
+                    <div class="bg-slate-100 p-6 rounded-xl border border-slate-200 flex flex-col justify-center">
+                        <h3 class="font-bold text-lg text-slate-800 mb-4 text-center">Kurzer Hänger?</h3>
+                        <p class="text-slate-600 text-sm mb-6 text-center">Falls ihr euch bei einem Detail unsicher seid, könnt ihr hier kurz auf die Experten-Seiten zurückspringen, um nochmal nachzulesen:</p>
+                        
+                        <div class="space-y-3">
+                            <button onclick="jumpToSlide(4)" class="w-full bg-white hover:bg-red-50 text-red-700 font-bold py-3 px-4 rounded-lg shadow-sm border border-red-200 transition-colors flex items-center justify-between">
+                                <span><span class="text-xl mr-2">α</span> Alpha nachlesen</span>
+                                <span>→</span>
+                            </button>
+                            <button onclick="jumpToSlide(5)" class="w-full bg-white hover:bg-blue-50 text-blue-700 font-bold py-3 px-4 rounded-lg shadow-sm border border-blue-200 transition-colors flex items-center justify-between">
+                                <span><span class="text-xl mr-2">β</span> Beta nachlesen</span>
+                                <span>→</span>
+                            </button>
+                            <button onclick="jumpToSlide(6)" class="w-full bg-white hover:bg-yellow-50 text-yellow-700 font-bold py-3 px-4 rounded-lg shadow-sm border border-yellow-200 transition-colors flex items-center justify-between">
+                                <span><span class="text-xl mr-2">γ</span> Gamma nachlesen</span>
+                                <span>→</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= S L I D E  8: Quiz & Pufferaufgabe ================= -->
+        <div id="slide-8" class="slide grid-cols-1 md:grid-cols-2 gap-8">
             <!-- Linke Seite: Quiz -->
             <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
-                <h2 class="text-3xl font-bold text-slate-800 mb-6">6. Wissenstest</h2>
+                <h2 class="text-3xl font-bold text-slate-800 mb-6">8. Wissenstest (Gemeinsam)</h2>
                 
                 <div class="w-full flex-grow flex flex-col items-center justify-center bg-slate-50 border border-slate-200 rounded-xl p-8 h-[350px]">
+                    <p class="text-center text-slate-600 mb-6">Habt ihr euch im Team gut ausgetauscht? Dann testet jetzt euer vereintes Wissen!</p>
                     <a href="https://nx72396.your-storageshare.de/apps/formvox/public/5726/jDlZdagKlE4fI0IWMdINg2MAqdKsB9Os" 
                        target="_blank" 
                        rel="noopener noreferrer" 
@@ -227,10 +348,10 @@
             <!-- Rechte Seite: Labor -->
             <div class="bg-white p-4 md:p-6 rounded-xl shadow-sm border border-slate-200 flex flex-col">
                 <h2 class="text-xl font-bold text-slate-800 mb-2">Das freie Schutzschild-Labor</h2>
-                <p class="text-slate-600 mb-4 text-xs">Teste alle Materialien kreuz und quer mit den verschiedenen Strahlen.</p>
+                <p class="text-slate-600 mb-4 text-xs">Überprüft gemeinsam eure Aussagen. Testet alle Materialien kreuz und quer.</p>
                 
                 <div class="flex-grow flex items-center justify-center mb-6">
-                    <canvas id="canvas-6" width="500" height="300"></canvas>
+                    <canvas id="canvas-8" width="500" height="300"></canvas>
                 </div>
 
                 <div class="space-y-4 text-sm">
@@ -292,7 +413,7 @@
     <script>
         // --- Navigation Logic ---
         let currentSlide = 1;
-        const totalSlides = 6;
+        const totalSlides = 8;
         let inBonus = false;
 
         function showBonusSlide() {
@@ -301,12 +422,11 @@
             inBonus = true;
             document.getElementById('page-indicator').innerText = "Bonus";
             document.getElementById('btn-prev').disabled = false;
-            document.getElementById('btn-next').disabled = true; // Im Bonuslevel geht es nicht weiter
+            document.getElementById('btn-next').disabled = true; 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function changeSlide(direction) {
-            // Wenn der Schüler im Bonuslevel ist und "Zurück" klickt
             if (inBonus) {
                 if (direction === -1) {
                     document.getElementById('slide-bonus').classList.remove('active');
@@ -317,21 +437,43 @@
                     document.getElementById('btn-next').disabled = currentSlide === totalSlides;
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
-                return; // Verhindert andere Navigationen während das Bonuslevel aktiv ist
+                return; 
             }
 
-            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
-            currentSlide += direction;
-            if (currentSlide < 1) currentSlide = 1;
-            if (currentSlide > totalSlides) currentSlide = totalSlides;
+            let targetSlide = currentSlide + direction;
 
-            document.getElementById(`slide-${currentSlide}`).classList.add('active');
-            document.getElementById('page-indicator').innerText = currentSlide;
-            document.getElementById('btn-prev').disabled = currentSlide === 1;
-            document.getElementById('btn-next').disabled = currentSlide === totalSlides;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            // --- Custom Routing für die Gruppenarbeit ---
+            // Wenn man auf einer Experten-Seite (4,5,6) ist und WEITER klickt -> Ab zu Seite 7 (Besprechung)
+            if (direction === 1 && (currentSlide === 4 || currentSlide === 5 || currentSlide === 6)) {
+                targetSlide = 7;
+            }
+            // Wenn man auf einer Experten-Seite ist und ZURÜCK klickt -> Ab zu Seite 3 (Auswahl)
+            if (direction === -1 && (currentSlide === 4 || currentSlide === 5 || currentSlide === 6)) {
+                targetSlide = 3;
+            }
+            // Wenn man in der Besprechung ist (7) und ZURÜCK klickt -> Ab zu Seite 3 (Auswahl)
+            if (direction === -1 && currentSlide === 7) {
+                targetSlide = 3;
+            }
+
+            // Sicherheitsgrenzen
+            if (targetSlide < 1) targetSlide = 1;
+            if (targetSlide > totalSlides) targetSlide = totalSlides;
+
+            jumpToSlide(targetSlide);
         }
 
+        function jumpToSlide(targetSlide) {
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            currentSlide = targetSlide;
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+            document.getElementById('page-indicator').innerText = currentSlide;
+            
+            document.getElementById('btn-prev').disabled = currentSlide === 1;
+            document.getElementById('btn-next').disabled = currentSlide === totalSlides;
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // --- Global Config & Colors ---
         const PROTON_COLOR = '#ef4444'; 
@@ -525,26 +667,26 @@
         }
 
         // ==========================================
-        // SLIDE 3, 4, 5: Spezifische Zerfälle
+        // SLIDE 4, 5, 6: Spezifische Zerfälle
         // ==========================================
         const contextsDecay = {
-            3: document.getElementById('canvas-3').getContext('2d'),
             4: document.getElementById('canvas-4').getContext('2d'),
-            5: document.getElementById('canvas-5').getContext('2d')
+            5: document.getElementById('canvas-5').getContext('2d'),
+            6: document.getElementById('canvas-6').getContext('2d')
         };
-        let activeDecays = { 3: null, 4: null, 5: null };
+        let activeDecays = { 4: null, 5: null, 6: null };
 
         function triggerDecay(slide) {
-            if (slide === 3) activeDecays[3] = { phase: 'break', x: 100, y: 150, time: 0, shieldX: 350 }; 
-            if (slide === 4) activeDecays[4] = { phase: 'transform', x: 100, y: 150, time: 0, shieldX: 350 }; 
-            if (slide === 5) activeDecays[5] = { phase: 'alpha', x: 100, y: 150, time: 0, alphaX: 100, shieldX: 400 }; 
+            if (slide === 4) activeDecays[4] = { phase: 'break', x: 100, y: 150, time: 0, shieldX: 350 }; 
+            if (slide === 5) activeDecays[5] = { phase: 'transform', x: 100, y: 150, time: 0, shieldX: 350 }; 
+            if (slide === 6) activeDecays[6] = { phase: 'alpha', x: 100, y: 150, time: 0, alphaX: 100, shieldX: 400 }; 
         }
 
-        function renderSlide3() {
-            const ctx = contextsDecay[3]; ctx.clearRect(0, 0, 500, 300);
+        function renderSlide4() {
+            const ctx = contextsDecay[4]; ctx.clearRect(0, 0, 500, 300);
             const nX = 100; const nY = 150; const sX = 350;
             drawShield(ctx, 1, sX); 
-            let d = activeDecays[3];
+            let d = activeDecays[4];
             
             if (!d) { drawNucleus(ctx, nX, nY, 1.5, false, baseCluster); } 
             else {
@@ -562,16 +704,16 @@
                     
                     ctx.restore();
                 }
-                if (d.time > 600) activeDecays[3] = null;
+                if (d.time > 600) activeDecays[4] = null;
             }
         }
 
-        function renderSlide4() {
-            const ctx = contextsDecay[4]; ctx.clearRect(0, 0, 500, 300);
+        function renderSlide5() {
+            const ctx = contextsDecay[5]; ctx.clearRect(0, 0, 500, 300);
             const nX = 100; const nY = 150;
             drawShield(ctx, 1, 200); drawShield(ctx, 2, 350); 
             
-            let d = activeDecays[4];
+            let d = activeDecays[5];
             if (!d) { drawNucleus(ctx, nX, nY, 1.5, false, baseCluster, false); } 
             else {
                 d.time++;
@@ -582,16 +724,16 @@
                     ctx.beginPath(); ctx.arc(d.x, d.y + (Math.sin(d.time)*5), 5, 0, Math.PI*2); 
                     ctx.fillStyle = ELECTRON_COLOR; ctx.shadowColor = ELECTRON_COLOR; ctx.shadowBlur = 10; ctx.fill(); ctx.shadowBlur = 0;
                 }
-                if (d.time > 600) activeDecays[4] = null;
+                if (d.time > 600) activeDecays[5] = null;
             }
         }
 
-        function renderSlide5() {
-            const ctx = contextsDecay[5]; ctx.clearRect(0, 0, 500, 300);
+        function renderSlide6() {
+            const ctx = contextsDecay[6]; ctx.clearRect(0, 0, 500, 300);
             const nX = 100; const nY = 150;
             drawShield(ctx, 1, 200); drawShield(ctx, 2, 280); drawShield(ctx, 3, 400); 
             
-            let d = activeDecays[5];
+            let d = activeDecays[6];
             if (!d) { drawNucleus(ctx, nX, nY, 1.5, false, baseCluster); } 
             else {
                 d.time++;
@@ -633,16 +775,17 @@
                         ctx.lineWidth = 3; ctx.stroke();
                     }
                 }
-                if (d.time > 600) activeDecays[5] = null;
+                if (d.time > 600) activeDecays[6] = null;
             }
         }
 
         // ==========================================
-        // SLIDE 6: Freies Labor
+        // SLIDE 8: Freies Labor
         // ==========================================
-        const ctx6 = document.getElementById('canvas-6').getContext('2d');
+        const ctx8 = document.getElementById('canvas-8').getContext('2d');
         let labShield = 0;
         let labParticles = []; 
+        let activeLabDecays = null;
         
         function setLabShield(type) {
             labShield = type;
@@ -665,17 +808,17 @@
             if (type === 'beta') { p.speed = 12; p.radius = 5; }
             if (type === 'gamma') { p.speed = 18; p.radius = 2; }
             labParticles.push(p);
-            activeDecays[6] = { time: 0 };
+            activeLabDecays = { time: 0 };
         }
 
-        function renderSlide6() {
-            ctx6.clearRect(0, 0, 500, 300);
+        function renderSlide8() {
+            ctx8.clearRect(0, 0, 500, 300);
             const nX = 100; const nY = 150; const sX = 350;
-            drawShield(ctx6, labShield, sX);
+            drawShield(ctx8, labShield, sX);
             
-            let wobble = activeDecays[6] && activeDecays[6].time < 15;
-            if(activeDecays[6]) activeDecays[6].time++;
-            drawNucleus(ctx6, nX, nY, 1.5, wobble, baseCluster);
+            let wobble = activeLabDecays && activeLabDecays.time < 15;
+            if(activeLabDecays) activeLabDecays.time++;
+            drawNucleus(ctx8, nX, nY, 1.5, wobble, baseCluster);
 
             for (let i = labParticles.length - 1; i >= 0; i--) {
                 let p = labParticles[i];
@@ -695,35 +838,35 @@
                     let waveLen = 40;
                     let startX = Math.max(nX + 20, p.x - waveLen);
                     
-                    ctx6.beginPath();
+                    ctx8.beginPath();
                     for(let w = startX; w <= p.x; w += 3) {
                         if (w > shieldX) continue;
                         let yOffset = Math.sin((w - p.time*15) * 0.4) * 8;
-                        if (w === startX) ctx6.moveTo(w, p.y + yOffset);
-                        else ctx6.lineTo(w, p.y + yOffset);
+                        if (w === startX) ctx8.moveTo(w, p.y + yOffset);
+                        else ctx8.lineTo(w, p.y + yOffset);
                     }
-                    ctx6.strokeStyle = GAMMA_COLOR; ctx6.lineWidth = 3; ctx6.stroke();
+                    ctx8.strokeStyle = GAMMA_COLOR; ctx8.lineWidth = 3; ctx8.stroke();
 
                     if (p.x > shieldX) {
-                        ctx6.beginPath();
+                        ctx8.beginPath();
                         let startWeakX = Math.max(startX, shieldX);
                         for(let w = startWeakX; w <= p.x; w += 3) {
                             let yOffset = Math.sin((w - p.time*15) * 0.4) * 8;
-                            if (w === startWeakX) ctx6.moveTo(w, p.y + yOffset);
-                            else ctx6.lineTo(w, p.y + yOffset);
+                            if (w === startWeakX) ctx8.moveTo(w, p.y + yOffset);
+                            else ctx8.lineTo(w, p.y + yOffset);
                         }
-                        ctx6.strokeStyle = 'rgba(250, 204, 21, 0.15)'; 
-                        ctx6.lineWidth = 3; ctx6.stroke();
+                        ctx8.strokeStyle = 'rgba(250, 204, 21, 0.15)'; 
+                        ctx8.lineWidth = 3; ctx8.stroke();
                     }
                 } else if (p.type === 'beta') {
-                    ctx6.beginPath(); ctx6.arc(p.x, p.y, p.radius, 0, Math.PI*2); ctx6.fillStyle = ELECTRON_COLOR; ctx6.fill();
+                    ctx8.beginPath(); ctx8.arc(p.x, p.y, p.radius, 0, Math.PI*2); ctx8.fillStyle = ELECTRON_COLOR; ctx8.fill();
                 } else if (p.type === 'alpha') {
-                    ctx6.save(); ctx6.translate(p.x, p.y);
-                    ctx6.beginPath(); ctx6.arc(-4, -4, 5.5, 0, Math.PI*2); ctx6.fillStyle = PROTON_COLOR; ctx6.fill(); ctx6.stroke();
-                    ctx6.beginPath(); ctx6.arc(4, -4, 5.5, 0, Math.PI*2); ctx6.fillStyle = NEUTRON_COLOR; ctx6.fill(); ctx6.stroke();
-                    ctx6.beginPath(); ctx6.arc(-4, 4, 5.5, 0, Math.PI*2); ctx6.fillStyle = NEUTRON_COLOR; ctx6.fill(); ctx6.stroke();
-                    ctx6.beginPath(); ctx6.arc(4, 4, 5.5, 0, Math.PI*2); ctx6.fillStyle = PROTON_COLOR; ctx6.fill(); ctx6.stroke();
-                    ctx6.restore();
+                    ctx8.save(); ctx8.translate(p.x, p.y);
+                    ctx8.beginPath(); ctx8.arc(-4, -4, 5.5, 0, Math.PI*2); ctx8.fillStyle = PROTON_COLOR; ctx8.fill(); ctx8.stroke();
+                    ctx8.beginPath(); ctx8.arc(4, -4, 5.5, 0, Math.PI*2); ctx8.fillStyle = NEUTRON_COLOR; ctx8.fill(); ctx8.stroke();
+                    ctx8.beginPath(); ctx8.arc(-4, 4, 5.5, 0, Math.PI*2); ctx8.fillStyle = NEUTRON_COLOR; ctx8.fill(); ctx8.stroke();
+                    ctx8.beginPath(); ctx8.arc(4, 4, 5.5, 0, Math.PI*2); ctx8.fillStyle = PROTON_COLOR; ctx8.fill(); ctx8.stroke();
+                    ctx8.restore();
                 }
                 if (p.x > 550) labParticles.splice(i, 1);
             }
@@ -733,42 +876,14 @@
         function mainLoop() {
             if (currentSlide === 1) renderSlide1();
             if (currentSlide === 2) renderSlide2();
-            if (currentSlide === 3) renderSlide3();
             if (currentSlide === 4) renderSlide4();
             if (currentSlide === 5) renderSlide5();
             if (currentSlide === 6) renderSlide6();
+            if (currentSlide === 8) renderSlide8();
             requestAnimationFrame(mainLoop);
         }
         mainLoop();
-
-        // --- Quiz Auswertung ---
-        function checkQuiz() {
-            const q1 = document.getElementById('q1').value;
-            const q2 = document.getElementById('q2').value;
-            const q3 = document.getElementById('q3').value;
-            const fb = document.getElementById('quiz-feedback');
-            
-            fb.classList.remove('hidden', 'bg-red-100', 'text-red-800', 'bg-green-100', 'text-green-800');
-
-            if(q1 === "" || q2 === "" || q3 === "") {
-                fb.classList.add('bg-red-100', 'text-red-800');
-                fb.innerText = "Bitte beantworte erst alle Fragen!";
-                return;
-            }
-
-            let correct = 0;
-            if(q1 === "r") correct++;
-            if(q2 === "r") correct++;
-            if(q3 === "r") correct++;
-
-            if(correct === 3) {
-                fb.classList.add('bg-green-100', 'text-green-800');
-                fb.innerText = "🎉 Perfekt! Du hast alle Fragen verstanden und richtig beantwortet.";
-            } else {
-                fb.classList.add('bg-red-100', 'text-red-800');
-                fb.innerText = `Du hast ${correct} von 3 Fragen richtig. Lies ggf. die vorherigen Seiten noch einmal aufmerksam durch!`;
-            }
-        }
     </script>
 </body>
 </html>
+```eof
